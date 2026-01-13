@@ -1702,6 +1702,11 @@ p {
 .mb-md { margin-bottom: var(--spacing-md); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
 
+/* Utility to hide elements temporarily */
+.is-hidden {
+  display: none !important;
+}
+
 .grid {
   display: grid;
   gap: var(--spacing-md);
