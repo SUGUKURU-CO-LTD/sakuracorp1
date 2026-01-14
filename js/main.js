@@ -41,6 +41,7 @@ function initMobileNav() {
   navToggle.addEventListener('click', function() {
     navToggle.classList.toggle('active');
     navList.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
     document.body.style.overflow = navList.classList.contains('active') ? 'hidden' : '';
   });
   
@@ -50,7 +51,9 @@ function initMobileNav() {
     link.addEventListener('click', function() {
       navToggle.classList.remove('active');
       navList.classList.remove('active');
+      document.body.classList.remove('menu-open');
       document.body.style.overflow = '';
+
     });
   });
 }
