@@ -55,6 +55,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body {
@@ -2466,31 +2467,25 @@ p {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
   
-  /* Improve text wrapping on mobile - natural line breaks */
-  p, .cta__text, .card__text, .business-card__description, .greeting-message,
-  .philosophy-card__text, .cta-banner__text, .support-feature__text,
-  .hero__subtitle, .hero__company-name {
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    line-break: loose;
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   
-  /* Hide <br> tags on mobile for natural text flow */
-  @media (max-width: 768px) {
-    .hero br,
-    .cta__text br,
-    .section__subtitle br,
-    .philosophy-card__text br,
-    .cta-banner__text br,
-    .support-feature__text br {
-      display: none;
-    }
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
+  
+  /* Prevent awkward line breaks in buttons */
   .btn {
     word-break: normal;
     overflow-wrap: normal;
     white-space: nowrap;
-    min-width: 200px;
+    min-width: auto;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
   }
   
   /* Mobile Navigation */

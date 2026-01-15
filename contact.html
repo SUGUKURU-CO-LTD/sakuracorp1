@@ -226,12 +226,58 @@
         <div class="fade-in">
           <div
             style="background-color: var(--color-white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm);">
-            <div
-              style="background-color: var(--color-primary-light); height: 350px; display: flex; align-items: center; justify-content: center; color: var(--color-text-light);">
-              <p>Google Maps 埋め込みエリア<br>（実際の住所に応じて設定）</p>
+            <!-- タブボタン -->
+            <div style="display: flex; border-bottom: 1px solid var(--color-border);">
+              <button onclick="switchTab('company')" id="tab-company" style="flex: 1; padding: 1rem; border: none; background: var(--color-primary-light); color: var(--color-text); cursor: pointer; font-weight: 600; font-size: 0.95rem;">株式会社SAKURA東海コーポレーション</button>
+              <button onclick="switchTab('school')" id="tab-school" style="flex: 1; padding: 1rem; border: none; background: var(--color-white); color: var(--color-text-light); cursor: pointer; font-weight: 500; font-size: 0.95rem;">SAKURA東海国際学園</button>
+            </div>
+            <!-- 会社住所タブ -->
+            <div id="content-company" style="padding: 1.5rem;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3269.536341019198!2d137.05452749169584!3d34.96822809186544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60049bdfb5406055%3A0x8116b24f954579d2!2z5oSb55-l5oqA6KGT6Z2p5paw5Y2U5ZCM57WE5ZCI!5e0!3m2!1sja!2sjp!4v1768456369637!5m2!1sja!2sjp"
+                width="100%" height="300" style="border:0; display: block; border-radius: 8px; margin-bottom: 1rem;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-text);">株式会社SAKURA東海コーポレーション</h3>
+              <p style="color: var(--color-text-light); line-height: 1.8; font-size: 0.95rem;">
+                〒446-0059 愛知県安城市三河安城本山2丁目11番地7 錦見ビル5F-A
+              </p>
+            </div>
+            <!-- 学園住所タブ（非表示） -->
+            <div id="content-school" style="display: none; padding: 1.5rem;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3258.221737423288!2d137.1296572!3d35.250738999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6003681917766997%3A0xfcdef30aa2ac8400!2z77yz77yh77yr77y177yy77yhIOadsea1t-Wbvemam-WtpuWckg!5e0!3m2!1sja!2sjp!4v1766929407877!5m2!1sja!2sjp"
+                width="100%" height="300" style="border:0; display: block; border-radius: 8px; margin-bottom: 1rem;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-text);">SAKURA東海国際学園</h3>
+              <p style="color: var(--color-text-light); line-height: 1.8; font-size: 0.95rem;">
+                〒480-1218 愛知県瀬戸市中品野町２３−２３ フィクトワール愛知 West
+              </p>
             </div>
           </div>
         </div>
+        <script>
+          function switchTab(tab) {
+            if (tab === 'company') {
+              document.getElementById('content-company').style.display = 'block';
+              document.getElementById('content-school').style.display = 'none';
+              document.getElementById('tab-company').style.background = 'var(--color-primary-light)';
+              document.getElementById('tab-company').style.color = 'var(--color-text)';
+              document.getElementById('tab-company').style.fontWeight = '600';
+              document.getElementById('tab-school').style.background = 'var(--color-white)';
+              document.getElementById('tab-school').style.color = 'var(--color-text-light)';
+              document.getElementById('tab-school').style.fontWeight = '500';
+            } else {
+              document.getElementById('content-company').style.display = 'none';
+              document.getElementById('content-school').style.display = 'block';
+              document.getElementById('tab-company').style.background = 'var(--color-white)';
+              document.getElementById('tab-company').style.color = 'var(--color-text-light)';
+              document.getElementById('tab-company').style.fontWeight = '500';
+              document.getElementById('tab-school').style.background = 'var(--color-primary-light)';
+              document.getElementById('tab-school').style.color = 'var(--color-text)';
+              document.getElementById('tab-school').style.fontWeight = '600';
+            }
+          }
+        </script>
       </div>
     </section>
   </main>
