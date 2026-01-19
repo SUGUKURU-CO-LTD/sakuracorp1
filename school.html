@@ -11,7 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 
 <body>
@@ -77,19 +77,19 @@
     </section>
 
     <!-- Stats Bar -->
-    <div class="stats-bar">
+    <div class="stats-bar" style="opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important;">
       <div class="container">
-        <div class="stats-bar__inner">
+        <div class="stats-bar__inner" style="opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important;">
           <div class="stats-bar__item">
-            <div class="stats-bar__number">15<span>年以上</span></div>
+            <div class="stats-bar__number">8<span>年以上</span></div>
             <div class="stats-bar__label">外国人支援の実績</div>
           </div>
           <div class="stats-bar__item">
-            <div class="stats-bar__number">4<span>ヶ国</span></div>
+            <div class="stats-bar__number">7<span>カ国以上</span></div>
             <div class="stats-bar__label">対応可能な国籍</div>
           </div>
           <div class="stats-bar__item">
-            <div class="stats-bar__number">N1〜N5</div>
+            <div class="stats-bar__number" data-prefix="N">2<span>〜N5</span></div>
             <div class="stats-bar__label">日本語試験対策</div>
           </div>
         </div>
@@ -99,11 +99,11 @@
     <!-- Registration Support Section -->
     <section class="section" style="padding-top: 6rem; padding-bottom: 6rem;">
       <div class="container">
-        <div class="section__header fade-in">
+        <div class="section__header" style="opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important;">
           <h2 class="section__title">登録支援機関として</h2>
           <p class="section__subtitle">REGISTERED SUPPORT ORGANIZATION</p>
         </div>
-        <div class="fade-in" style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <div style="max-width: 900px; margin: 0 auto; text-align: center; opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important;">
           <p style="font-size: 1.1rem; line-height: 2.2; color: var(--color-text-light);">
             当社は、外国人労働者の受入れに関する支援機関として、<br>
             入国前の準備から入国後の生活支援まで、包括的なサポートを提供しています。<br>
@@ -118,11 +118,11 @@
     <!-- Support Flow Section -->
     <section class="section section--light">
       <div class="container">
-        <div class="section__header fade-in">
+        <div class="section__header">
           <h2 class="section__title">支援の流れ</h2>
           <p class="section__subtitle">SUPPORT FLOW</p>
         </div>
-        <div class="service-flow fade-in">
+        <div class="service-flow">
           <div class="service-flow__step">
             <div class="service-flow__number">1</div>
             <h4 class="service-flow__title">入国前準備</h4>
@@ -166,11 +166,11 @@
     <!-- Support Features Section -->
     <section class="section" style="padding-top: 6rem; padding-bottom: 6rem;">
       <div class="container">
-        <div class="section__header fade-in">
+        <div class="section__header">
           <h2 class="section__title">私たちがサポートすること</h2>
           <p class="section__subtitle">OUR SUPPORT</p>
         </div>
-        <div class="support-features fade-in">
+        <div class="support-features">
           <div class="support-feature">
             <div class="support-feature__icon">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -250,7 +250,7 @@
     <!-- School Banner Section -->
     <section class="school-banner">
       <div class="container">
-        <div class="school-banner__inner fade-in">
+        <div class="school-banner__inner">
           <div class="school-banner__icon">
             <svg viewBox="0 0 24 24">
               <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
@@ -277,11 +277,11 @@
     <!-- Target Countries Section -->
     <section class="section" style="padding-top: 6rem; padding-bottom: 6rem;">
       <div class="container">
-        <div class="section__header fade-in">
+        <div class="section__header">
           <h2 class="section__title">対応可能な国籍・地域</h2>
           <p class="section__subtitle">SUPPORTED COUNTRIES</p>
         </div>
-        <div class="business-preview fade-in">
+        <div class="business-preview">
           <div class="business-preview__card">
             <div class="business-preview__number">1</div>
             <h3 class="business-preview__title">中国</h3>
@@ -320,7 +320,8 @@
         <h2 class="cta__title">外国人材の受入れを検討の皆様へ</h2>
         <p class="cta__text">
           技能実習生・特定技能外国人の受入れに関するご相談、<br>
-          まずはお気軽に<br>お問い合わせください。専門スタッフが丁寧にご説明いたします。
+          まずはお気軽にお問い合わせください。<br>
+          専門スタッフが丁寧にご説明いたします。
         </p>
         <a href="contact.html" class="btn btn--primary">お問い合わせはこちら</a>
       </div>
@@ -369,11 +370,13 @@
           </ul>
         </div>
         <div class="footer__nav">
-          <h4 class="footer__title">外部リンク</h4>
+          <h4 class="footer__title">外部リンク・SNS</h4>
           <ul class="footer__links">
             <li><a href="https://sakura-tokai.jp/" class="footer__link" target="_blank"
-                rel="noopener">SAKURA東海国際学園公式サイト</a>
+                rel="noopener">SAKURA東海国際学園</a>
             </li>
+            <li><a href="#" class="footer__link" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="#" class="footer__link" target="_blank" rel="noopener">TikTok</a></li>
           </ul>
         </div>
       </div>
@@ -383,7 +386,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 
 </html>

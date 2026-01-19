@@ -89,21 +89,27 @@ function initSmoothScroll() {
  * index.htmlの統計バーと事業カードは除外
  */
 function initFadeInAnimation() {
+  // アニメーションを完全に無効化
+  return;
+  
   const fadeElements = document.querySelectorAll('.fade-in');
   
   if (fadeElements.length === 0) return;
   
-  // index.htmlの統計バーと事業カード内の要素は除外
+  // index.htmlとschool.htmlの統計バーと事業カード内の要素は除外
   const isIndexPage = window.location.pathname === '/' || 
                       window.location.pathname === '/index.html' || 
                       window.location.pathname.endsWith('/index.html');
   
+  const isSchoolPage = window.location.pathname.includes('school.html');
+  
   // Add staggered delay based on position
   fadeElements.forEach((element, index) => {
-    // index.htmlの統計バーと事業カード内の要素はアニメーション無効化
-    if (isIndexPage && (
+    // index.htmlとschool.htmlの統計バーと事業カード内の要素はアニメーション無効化
+    if ((isIndexPage || isSchoolPage) && (
       element.closest('.stats-bar') || 
-      element.closest('.business-preview')
+      element.closest('.business-preview') ||
+      element.closest('.section__header')
     )) {
       element.classList.add('visible');
       element.style.transitionDelay = '0s';
@@ -115,10 +121,11 @@ function initFadeInAnimation() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // index.htmlの統計バーと事業カードは即座に表示
-        if (isIndexPage && (
+        // index.htmlとschool.htmlの統計バーと事業カードは即座に表示
+        if ((isIndexPage || isSchoolPage) && (
           entry.target.closest('.stats-bar') || 
-          entry.target.closest('.business-preview')
+          entry.target.closest('.business-preview') ||
+          entry.target.closest('.section__header')
         )) {
           entry.target.classList.add('visible');
         } else {
