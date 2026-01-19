@@ -26,12 +26,12 @@
         grid-template-columns: 1fr;
         gap: 1.25rem;
       }
-      
+
       .business-card {
         padding: 1.5rem 1.25rem 1.25rem;
         letter-spacing: normal !important;
       }
-      
+
       .business-card__number {
         width: 40px;
         height: 40px;
@@ -39,23 +39,23 @@
         top: 1rem;
         right: 1rem;
       }
-      
+
       .business-card__icon {
         width: 56px;
         height: 56px;
         margin-bottom: 1rem;
       }
-      
+
       .business-card__icon svg {
         width: 28px;
         height: 28px;
       }
-      
+
       .business-card__title {
         font-size: 1.15rem;
         margin-bottom: 0.75rem;
       }
-      
+
       .business-card__description {
         font-size: 0.9rem;
         line-height: 1.6;
@@ -230,11 +230,29 @@
     }
 
     .countries-grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
       gap: 1.5rem;
       margin-top: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .countries-grid .country-badge {
+      grid-column: span 2;
+    }
+
+    .countries-grid .country-badge:nth-child(5) {
+      grid-column: 2 / 4;
+    }
+
+    .countries-grid .country-badge:nth-child(6) {
+      grid-column: 4 / 6;
+    }
+
+    .countries-grid .country-badge:nth-child(7) {
+      grid-column: 6 / 8;
     }
 
     .country-badge {
@@ -346,49 +364,49 @@
         flex-direction: column;
         align-items: center;
       }
-      
+
       .country-badge {
         width: 100%;
         max-width: 250px;
         justify-content: center;
       }
-      
+
       .service-images-grid {
         grid-template-columns: 1fr !important;
         padding: 0 1rem !important;
       }
-      
+
       .service-images-grid img {
         height: 200px !important;
       }
-      
+
       .grid--4 {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 0.75rem !important;
       }
-      
+
       .grid--4 .card {
         padding: 1rem !important;
       }
-      
+
       .grid--4 .card p {
         font-size: 0.85rem !important;
       }
-      
+
       /* Header mobile fixes */
       .nav__list {
         padding: 1rem;
       }
-      
+
       .nav__link {
         padding: 0.75rem 1.5rem;
         font-size: 1.1rem;
       }
-      
+
       .page-header {
         padding: 3rem 0;
       }
-      
+
       .page-header__title {
         font-size: 1.75rem;
       }
@@ -410,7 +428,6 @@
           </svg>
         </div>
         <div class="header__logo-text">
-          SAKURA東海<br>
           <span>株式会社SAKURA東海コーポレーション</span>
         </div>
       </a>
@@ -422,10 +439,10 @@
         </button>
         <ul class="nav__list">
           <li><a href="index.html" class="nav__link">ホーム</a></li>
-          <li><a href="about.html" class="nav__link">会社概要</a></li>
           <li><a href="service.html" class="nav__link active">事業内容</a></li>
           <li><a href="school.html" class="nav__link">登録支援機関</a></li>
           <li><a href="news.html" class="nav__link">お知らせ</a></li>
+          <li><a href="about.html" class="nav__link">会社概要</a></li>
           <li><a href="recruit.html" class="nav__link is-hidden">採用情報</a></li>
           <li><a href="contact.html" class="nav__link">お問い合わせ</a></li>
         </ul>
@@ -449,25 +466,25 @@
       <div class="container">
         <div class="fade-in" style="max-width: 900px; margin: 0 auto; text-align: center;">
           <h2 style="font-size: 1.75rem; color: var(--color-primary-dark); margin-bottom: 1.5rem;">
-            外国人材の未来を、トータルサポート
+            外国人材と企業様の未来を、トータルサポート
           </h2>
           <p style="font-size: 1.1rem; line-height: 2;">
             SAKURA東海コーポレーションは、<br>
-            <strong>外国人材管理</strong>・<strong>外国人材紹介</strong>・<strong>登録支援機関</strong>・<strong>入国後講習</strong>の4つの事業を柱に、<br>
+            <strong>外国人材管理</strong>・<strong>登録支援機関</strong>・<strong>外国人材紹介</strong>・<strong>入国後講習</strong>の4つの事業を柱に、<br>
             外国人材と受入れ企業の双方を包括的にサポートしています。
           </p>
 
           <div class="experience-stats">
             <div class="experience-stat">
-              <div class="experience-stat__number">15<span>年以上</span></div>
+              <div class="experience-stat__number">8<span>年以上</span></div>
               <div class="experience-stat__label">入国後講習の実績</div>
             </div>
             <div class="experience-stat">
-              <div class="experience-stat__number">N1<span>〜</span>N5</div>
+              <div class="experience-stat__number">N2<span>〜</span>N5</div>
               <div class="experience-stat__label">日本語能力試験対策</div>
             </div>
             <div class="experience-stat">
-              <div class="experience-stat__number">4<span>ヶ国</span></div>
+              <div class="experience-stat__number">7<span>カ国以上</span></div>
               <div class="experience-stat__label">人材紹介対応国</div>
             </div>
           </div>
@@ -494,52 +511,62 @@
             <div class="business-card__number">1</div>
             <div class="business-card__icon">
               <svg viewBox="0 0 24 24">
-                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                <path
+                  d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
               </svg>
             </div>
             <h3 class="business-card__title">外国人材管理事業</h3>
-            <p class="business-card__description">技能実習生・特定技能外国人の一貫した管理業務を担当。在留資格関連の手続き、生活指導、日本語学習支援など、外国人材が円滑に仕事に取り組めるよう全面的にバックアップいたします。</p>
+            <p class="business-card__description">
+              技能実習生の一貫した管理業務を担当。<br>
+              生活指導、日本語学習支援など、<br>
+              外国人材が円滑に仕事に取り組めるよう全面的にバックアップいたします。</p>
             <ul class="business-card__features">
-              <li>在留資格関連の手続きサポート</li>
-              <li>生活指導・日本語学習支援</li>
+              <li>生活指導サポート</li>
               <li>定期的なフォローアップ</li>
               <li>企業との橋渡し</li>
             </ul>
           </div>
 
-          <!-- Business 2: 外国人材紹介事業 -->
+          <!-- Business 2: 登録支援機関事業 -->
           <div class="business-card">
             <div class="business-card__number">2</div>
             <div class="business-card__icon">
               <svg viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                <path
+                  d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
               </svg>
             </div>
-            <h3 class="business-card__title">外国人材紹介事業</h3>
-            <p class="business-card__description">インドネシア・ベトナム・中国・フィリピン・ミャンマー・カンボジアなど、各国からの技能実習生・特定技能外国人の紹介。独自の海外ネットワークで最適な人材をお届けします。</p>
+            <h3 class="business-card__title">登録支援機関事業</h3>
+            <p class="business-card__description">
+              出入国在留管理庁に登録された登録支援機関として、<br>
+              外国人材の受入れ企業を包括的にサポート。<br>
+              行政手続き支援、生活サポート、日本語学習指導、企業様への相談対応など<br>
+              一号支援業務をワンストップで提供いたします。</p>
             <ul class="business-card__features">
-              <li>7カ国以上からの人材紹介</li>
-              <li>技能実習生・特定技能外国人に対応</li>
-              <li>独自の海外ネットワーク</li>
-              <li>最適なマッチング</li>
+              <li>出入国在留管理庁の認定登録支援機関</li>
+              <li>募集・教育・採用・管理の一貫体制</li>
+              <li>行政的支援・生活支援のサポート、企業様への相談対応</li>
             </ul>
           </div>
 
-          <!-- Business 3: 登録支援機関事業 -->
+          <!-- Business 3: 外国人材紹介事業 -->
           <div class="business-card">
             <div class="business-card__number">3</div>
             <div class="business-card__icon">
               <svg viewBox="0 0 24 24">
-                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
               </svg>
             </div>
-            <h3 class="business-card__title">登録支援機関事業</h3>
-            <p class="business-card__description">出入国在留管理庁に登録された登録支援機関として、外国人材の受入れ企業を包括的にサポート。計画作成、生活相談、日本語学習指導など一号支援業務をワンストップで提供いたします。</p>
+            <h3 class="business-card__title">外国人材紹介事業</h3>
+            <p class="business-card__description">
+              インドネシア・ベトナム・中国・フィリピン・ミャンマー・スリランカなど、<br>
+              各国からの特定技能外国人の紹介。<br>
+              独自の海外ネットワークで最適な人材をお届けします。</p>
             <ul class="business-card__features">
-              <li>出入国在留管理庁への登録支援機関</li>
-              <li>募集・教育・採用・管理の一貫体制</li>
-              <li>印尼・ベトナム等からの人材紹介</li>
-              <li>海外職種特化型学習施設の運営</li>
+              <li>7カ国以上からの人材紹介</li>
+              <li>特定技能外国人に対応</li>
+              <li>独自の海外ネットワーク</li>
             </ul>
           </div>
 
@@ -552,22 +579,23 @@
               </svg>
             </div>
             <h3 class="business-card__title">入国後講習事業</h3>
-            <p class="business-card__description">新規技能実習生に向けた入国後講習を<strong>15年以上</strong>にわたり実施。介護特化型の入国後講習も充実しています。</p>
+            <p class="business-card__description">
+              新規技能実習生に向けた入国後講習を<strong>8年以上</strong>実施。<br>
+              介護に特化した講習も充実。<br>
+              独自カリキュラムで職種に応じた授業を提供。</p>
             <ul class="business-card__features">
-              <li>15年以上の豊富な実績</li>
+              <li>8年以上の豊富な実績</li>
               <li>介護特化型講習プログラム</li>
               <li>独自カリキュラムで職種に応じた授業</li>
-              <li>実践的なコミュニケーション重視</li>
             </ul>
           </div>
         </div>
 
         <!-- CTA Banner -->
         <div class="cta-banner fade-in">
-          <h3 class="cta-banner__title">金額・条件はすべて柔軟に対応いたします</h3>
+          <h3 class="cta-banner__title">案件ごとに最適なプランをご提案いたします</h3>
           <p class="cta-banner__text">
-            案件ごとに最適なプランをご提案。どのようなご相談にも応じます。<br>
-            まずはお気軽に<br>お問い合わせください。
+            どのようなご相談にも応じますので、まずはお気軽にお問い合わせください。
           </p>
           <a href="contact.html" class="btn btn--primary">お問い合わせはこちら</a>
         </div>
@@ -598,20 +626,53 @@
             <span class="country-badge__flag">🇲🇲</span>
             <span>ミャンマー</span>
           </div>
+          <div class="country-badge">
+            <span class="country-badge__flag">🇨🇳</span>
+            <span>中国</span>
+          </div>
+          <div class="country-badge">
+            <span class="country-badge__flag">🇵🇭</span>
+            <span>フィリピン</span>
+          </div>
+          <div class="country-badge">
+            <span class="country-badge__flag">🇹🇭</span>
+            <span>タイ</span>
+          </div>
+        </div>
+        <div class="fade-in" style="max-width: 800px; margin: 1.5rem auto 0; text-align: center;">
+          <p style="color: var(--color-primary); font-weight: 500; font-size: 1rem;">
+            ※ その他の国も対応可能です
+          </p>
         </div>
         <div class="fade-in" style="max-width: 800px; margin: 2rem auto 0; text-align: center;">
           <p style="color: var(--color-text-light); line-height: 1.9;">
             インドネシアでは、<strong>職種特化型学習施設</strong>も運営しています。<br>
-            介護、外食業、飲食料品製造業、自動車整備業などに特化した<br>
+            介護、外食業、飲食料品製造業、給食製造業、自動車整備業などに特化した<br>
             教育体制を構築し、即戦力となる人材の送り出しと管理まで行います。
           </p>
         </div>
-        
+
         <!-- Service Images inside Countries Section -->
-        <div class="service-images-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1000px; margin: 3rem auto 0; padding: 0 1rem;">
-          <img src="images/service.jpg" alt="サービス1" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
-          <img src="images/service2.jpg" alt="サービス2" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
-          <img src="images/service3.jpg" alt="サービス3" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+        <div class="service-images-grid"
+          style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1000px; margin: 3rem auto 0; padding: 0 1rem;">
+          <img src="images/service.jpg" alt="サービス1"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service2.jpg" alt="サービス2"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service3.jpg" alt="サービス3"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service10.jpg" alt="サービス4"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service11.jpg" alt="サービス5"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service12.jpg" alt="サービス6"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service13.jpg" alt="サービス7"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service14.jpg" alt="サービス8"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
+          <img src="images/service15.jpg" alt="サービス9"
+            style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow-md);">
         </div>
       </div>
     </section>
@@ -628,29 +689,47 @@
             特定技能制度で認められた以下の分野での受入れをサポートしています。
           </p>
           <div class="grid grid--4" style="text-align: center; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🏥 介護</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🏥 介護</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🧹 ビルクリーニング</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🧹 ビルクリーニング</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🏭 製造業</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🔩 素形材産業</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🏗️ 建設</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">⚙️ 産業機械<br>製造業</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🔧 自動車整備</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">💻 電気・電子情報<br>関連産業</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🍴 外食業</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🏗️ 建設</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🥫 飲食料品製造</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">⚓ 造船・<br>舶用工業</p>
             </div>
-            <div class="card" style="padding: 1.25rem;">
-              <p style="font-weight: 500; font-size: 0.95rem;">🏨 宿泊</p>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🔧 自動車整備</p>
+            </div>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">✈️ 航空</p>
+            </div>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🏨 宿泊</p>
+            </div>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🌾 農業</p>
+            </div>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🎣 漁業</p>
+            </div>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🥫 飲食料品<br>製造業</p>
+            </div>
+            <div class="card" style="padding: 1.25rem; display: flex; align-items: center; justify-content: center; min-height: 80px;">
+              <p style="font-weight: 500; font-size: 0.95rem; margin: 0;">🍴 外食業</p>
             </div>
           </div>
         </div>
@@ -673,7 +752,7 @@
               日本語教育、生活指導、交通安全指導など、日本で生活する必要な知識を教育しています。
             </p>
             <span class="btn btn--primary" style="display: inline-block;">
-              公式サイトへ →
+              SAKURA東海国際学園公式サイトへ →
             </span>
           </div>
         </a>
@@ -686,7 +765,7 @@
         <h2 class="cta__title">お気軽にご相談ください</h2>
         <p class="cta__text">
           外国人材の受入れに関するご相談、サービスに関するお問い合わせなど、<br>
-          まずはお気軽に<br>お問い合わせください。
+          まずはお気軽にお問い合わせください。
         </p>
         <a href="contact.html" class="btn btn--primary">お問い合わせはこちら</a>
       </div>
@@ -699,11 +778,19 @@
       <div class="footer__inner">
         <div class="footer__company">
           <div class="footer__logo">
-            SAKURA東海
-            <span>株式会社SAKURA東海コーポレーション</span>
+            <div class="footer__logo-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" fill="#FCE4EC" />
+                <path d="M24 8C24 8 28 14 28 20C28 26 24 32 24 32C24 32 20 26 20 20C20 14 24 8 24 8Z" fill="#F8BBD9" />
+                <path d="M12 20C12 20 18 24 24 24C30 24 36 20 36 20C36 20 30 28 24 28C18 28 12 20 12 20Z" fill="#E91E63" />
+                <circle cx="24" cy="22" r="4" fill="#C2185B" />
+              </svg>
+            </div>
+            <span>株式会社<br>SAKURA東海コーポレーション</span>
           </div>
           <div class="footer__info">
-            〒446-0059 愛知県安城市三河安城本町2丁目11番地7 錦見ビル5F-A<br>
+            〒446-0059<br>
+            愛知県安城市三河安城本町2丁目11番地7 錦見ビル5F-A<br>
             TEL: 0566-45-5597<br>
             FAX: 0566-45-5591
           </div>
@@ -727,10 +814,12 @@
           </ul>
         </div>
         <div class="footer__nav">
-          <h4 class="footer__title">外部リンク</h4>
+          <h4 class="footer__title">外部リンク・SNS</h4>
           <ul class="footer__links">
             <li><a href="https://sakura-tokai.jp/" class="footer__link" target="_blank"
-                rel="noopener">SAKURA東海国際学園公式サイト</a></li>
+                rel="noopener">SAKURA東海国際学園</a></li>
+            <li><a href="#" class="footer__link" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="#" class="footer__link" target="_blank" rel="noopener">TikTok</a></li>
           </ul>
         </div>
       </div>

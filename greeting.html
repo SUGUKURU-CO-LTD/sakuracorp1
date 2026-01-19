@@ -28,7 +28,6 @@
           </svg>
         </div>
         <div class="header__logo-text">
-          SAKURA東海<br>
           <span>株式会社SAKURA東海コーポレーション</span>
         </div>
       </a>
@@ -40,10 +39,10 @@
         </button>
         <ul class="nav__list">
           <li><a href="index.html" class="nav__link">ホーム</a></li>
-          <li><a href="about.html" class="nav__link">会社概要</a></li>
           <li><a href="service.html" class="nav__link">事業内容</a></li>
           <li><a href="school.html" class="nav__link">登録支援機関</a></li>
           <li><a href="news.html" class="nav__link">お知らせ</a></li>
+          <li><a href="about.html" class="nav__link">会社概要</a></li>
           <li><a href="recruit.html" class="nav__link is-hidden">採用情報</a></li>
           <li><a href="contact.html" class="nav__link">お問い合わせ</a></li>
         </ul>
@@ -65,16 +64,9 @@
     <!-- Greeting Section -->
     <section class="section" style="padding-top: 5rem; padding-bottom: 5rem;">
       <div class="container">
-        <div class="greeting-content fade-in">
-          <div class="greeting-photo">
-            <div class="greeting-photo__image">
-              代表者写真
-            </div>
-            <p class="greeting-photo__name">○○ ○○</p>
-            <p class="greeting-photo__title">代表取締役</p>
-          </div>
-          <div class="greeting-message">
-            <h2>外国人材と企業の架け橋として</h2>
+        <div class="greeting-content fade-in" style="display: block; max-width: 900px; margin: 0 auto;">
+          <div class="greeting-message" style="width: 100%;">
+            <h2>外国人材と企業様の未来をトータルサポート</h2>
 
             <p>
               株式会社SAKURA東海コーポレーションのウェブサイトを閲覧いただき、誠にありがとうございます。
@@ -83,7 +75,7 @@
             </p>
 
             <p>
-              日本の産業を支えていく上で、外国人労働者の皆様の力是不可欠なものとなっています。
+              日本の産業を支えていく上で、外国人労働者の皆様の力は不可欠なものとなっています。
               しかし、単に「人手を確保する」という観点ではなく、
               異なる文化や価値観を持つ方々が安心して働き暮らせる環境をつくることが、
               真の「共生」であると私たちは確信しています。
@@ -114,8 +106,11 @@
             </p>
 
             <div class="greeting-signature">
-              <p>株式会社SAKURA東海コーポレーション</p>
-              <p class="name">代表取締役　○○ ○○</p>
+              <p style="margin-bottom: 0.4rem; text-align: right;">株式会社SAKURA東海コーポレーション</p>
+              <div style="display: flex; align-items: center; gap: 1rem; justify-content: flex-end;">
+                <p class="name" style="margin: 0;">代表取締役</p>
+                <img src="images/signature2.png" alt="代表取締役サイン">
+              </div>
             </div>
           </div>
         </div>
@@ -129,13 +124,13 @@
           <h2 class="section__title">私たちの実績</h2>
           <p class="section__subtitle">OUR TRACK RECORD</p>
         </div>
-        <div class="stats-bar__inner fade-in" style="justify-content: center; gap: 4rem; flex-wrap: wrap;">
+        <div class="stats-bar__inner" style="justify-content: center; gap: 4rem; flex-wrap: wrap;">
           <div class="stats-bar__item" style="min-width: 200px;">
-            <div class="stats-bar__number">15<span>年以上</span></div>
+            <div class="stats-bar__number">8<span>年以上</span></div>
             <div class="stats-bar__label">外国人材支援の実績</div>
           </div>
           <div class="stats-bar__item" style="min-width: 200px;">
-            <div class="stats-bar__number">4<span>ヶ国</span></div>
+            <div class="stats-bar__number">7<span>カ国以上</span></div>
             <div class="stats-bar__label">対応可能な国籍</div>
           </div>
           <div class="stats-bar__item" style="min-width: 200px;">
@@ -158,7 +153,7 @@
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
             <h4 style="color: var(--color-primary-dark); margin-bottom: 0.75rem;">外国人材を守る</h4>
             <p class="card__text">
-              パスポート管理料の徴収禁止など、法令を遵守した適正な支援を行い、
+              パスポート管理料の徴収禁止など、法令を遵守した適正な支援を行い、<br>
               実習生・特定技能外国人の権利を保護します。
             </p>
           </div>
@@ -166,7 +161,7 @@
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏢</div>
             <h4 style="color: var(--color-primary-dark); margin-bottom: 0.75rem;">企業を支える</h4>
             <p class="card__text">
-              外国人雇用に関する手続きの代行・助言を行い、
+              外国人雇用に関する手続きの代行・助言を行い、<br>
               企業の受入れ負担を軽減します。
             </p>
           </div>
@@ -174,7 +169,7 @@
             <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌏</div>
             <h4 style="color: var(--color-primary-dark); margin-bottom: 0.75rem;">社会に貢献する</h4>
             <p class="card__text">
-              多文化共生の実現を目指し、日本と外国の架け橋として
+              多文化共生の実現を目指し、日本と外国の架け橋として<br>
               社会の発展に寄与します。
             </p>
           </div>
@@ -187,9 +182,8 @@
       <div class="container">
         <h2 class="cta__title">みませんか</h2>
         <p class="cta__text">
-          外国人材の受入れに関するご相談、<br>
-          国外人材の採用に関するご質問など、<br>
-          まずはお気軽に<br>お問い合わせください。
+          外国人材の受入れに関するご相談、国外人材の採用に関するご質問など、<br>
+          まずはお気軽に、お問い合わせください。
         </p>
         <a href="contact.html" class="btn btn--primary">お問い合わせはこちら</a>
       </div>
@@ -202,11 +196,19 @@
       <div class="footer__inner">
         <div class="footer__company">
           <div class="footer__logo">
-            SAKURA東海
-            <span>株式会社SAKURA東海コーポレーション</span>
+            <div class="footer__logo-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" fill="#FCE4EC" />
+                <path d="M24 8C24 8 28 14 28 20C28 26 24 32 24 32C24 32 20 26 20 20C20 14 24 8 24 8Z" fill="#F8BBD9" />
+                <path d="M12 20C12 20 18 24 24 24C30 24 36 20 36 20C36 20 30 28 24 28C18 28 12 20 12 20Z" fill="#E91E63" />
+                <circle cx="24" cy="22" r="4" fill="#C2185B" />
+              </svg>
+            </div>
+            <span>株式会社<br>SAKURA東海コーポレーション</span>
           </div>
           <div class="footer__info">
-            〒446-0059 愛知県安城市三河安城本日2丁目11番地7 錦見ビル5F-A<br>
+            〒446-0059<br>
+            愛知県安城市三河安城本町2丁目11番地7 錦見ビル5F-A<br>
             TEL: 0566-45-5597<br>
             FAX: 0566-45-5591
           </div>
@@ -230,11 +232,13 @@
           </ul>
         </div>
         <div class="footer__nav">
-          <h4 class="footer__title">外部リンク</h4>
+          <h4 class="footer__title">外部リンク・SNS</h4>
           <ul class="footer__links">
             <li><a href="https://sakura-tokai.jp/" class="footer__link" target="_blank"
-                rel="noopener">SAKURA東海国際学園公式サイト</a>
+                rel="noopener">SAKURA東海国際学園</a>
             </li>
+            <li><a href="#" class="footer__link" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="#" class="footer__link" target="_blank" rel="noopener">TikTok</a></li>
           </ul>
         </div>
       </div>

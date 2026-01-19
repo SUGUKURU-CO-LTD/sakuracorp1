@@ -53,7 +53,6 @@ function initMobileNav() {
       navList.classList.remove('active');
       document.body.classList.remove('menu-open');
       document.body.style.overflow = '';
-
     });
   });
 }
@@ -87,21 +86,51 @@ function initSmoothScroll() {
 
 /**
  * Enhanced Fade In Animation on Scroll with stagger effect
+ * index.htmlの統計バーと事業カードは除外
  */
 function initFadeInAnimation() {
+  // アニメーションを完全に無効化
+  return;
+  
   const fadeElements = document.querySelectorAll('.fade-in');
   
   if (fadeElements.length === 0) return;
   
+  // index.htmlとschool.htmlの統計バーと事業カード内の要素は除外
+  const isIndexPage = window.location.pathname === '/' || 
+                      window.location.pathname === '/index.html' || 
+                      window.location.pathname.endsWith('/index.html');
+  
+  const isSchoolPage = window.location.pathname.includes('school.html');
+  
   // Add staggered delay based on position
   fadeElements.forEach((element, index) => {
+    // index.htmlとschool.htmlの統計バーと事業カード内の要素はアニメーション無効化
+    if ((isIndexPage || isSchoolPage) && (
+      element.closest('.stats-bar') || 
+      element.closest('.business-preview') ||
+      element.closest('.section__header')
+    )) {
+      element.classList.add('visible');
+      element.style.transitionDelay = '0s';
+      return;
+    }
     element.style.transitionDelay = `${index * 0.1}s`;
   });
   
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        // index.htmlとschool.htmlの統計バーと事業カードは即座に表示
+        if ((isIndexPage || isSchoolPage) && (
+          entry.target.closest('.stats-bar') || 
+          entry.target.closest('.business-preview') ||
+          entry.target.closest('.section__header')
+        )) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.add('visible');
+        }
         observer.unobserve(entry.target);
       }
     });
@@ -140,8 +169,17 @@ function initHeaderScroll() {
 
 /**
  * Sakura Petal Falling Animation - Enhanced Beautiful Version
+ * トップページのみ4秒間表示
  */
 function initSakuraAnimation() {
+  // トップページ以外では桜吹雪を表示しない
+  const currentPage = window.location.pathname;
+  const isTopPage = currentPage === '/' || currentPage === '/index.html' || currentPage.endsWith('/index.html');
+  
+  if (!isTopPage) {
+    return; // トップページ以外は何もしない
+  }
+  
   // Check if sakura container already exists
   if (document.querySelector('.sakura-container')) return;
   
@@ -155,6 +193,17 @@ function initSakuraAnimation() {
   for (let i = 0; i < petalCount; i++) {
     createBeautifulPetal(container, i);
   }
+  
+  // 4秒後に桜吹雪を削除
+  setTimeout(() => {
+    if (container && container.parentNode) {
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => {
+        container.remove();
+      }, 500);
+    }
+  }, 4000);
 }
 
 function createBeautifulPetal(container, index) {
@@ -249,32 +298,85 @@ function initCounterAnimation() {
     threshold: 0.5
   });
   
-  counters.forEach(counter => observer.observe(counter));
+  counters.forEach(counter => {
+    observer.observe(counter);
+  });
 }
 
 function animateCounter(element, target, unit) {
-  const duration = 2000;
-  const start = 0;
-  const startTime = performance.now();
+  let current = 0;
+  const increment = target / 50; // 50 steps
+  const duration = 1500; // 1.5 seconds
+  const stepTime = duration / 50;
   
-  function update(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    
-    // Easing function
-    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-    
-    const current = Math.floor(start + (target - start) * easeOutQuart);
-    element.innerHTML = `${current}${unit}`;
-    
-    if (progress < 1) {
-      requestAnimationFrame(update);
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.innerHTML = `${target}<span>${unit}</span>`;
+      clearInterval(timer);
     } else {
-      element.innerHTML = `${target}${unit}`;
+      element.innerHTML = `${Math.floor(current)}<span>${unit}</span>`;
     }
-  }
+  }, stepTime);
+}
+
+/**
+ * Form Validation
+ */
+function initFormValidation() {
+  const form = document.querySelector('.contact-form');
   
-  requestAnimationFrame(update);
+  if (!form) return;
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Simple validation
+    const name = form.querySelector('input[name="name"]');
+    const email = form.querySelector('input[name="email"]');
+    const message = form.querySelector('textarea[name="message"]');
+    
+    let isValid = true;
+    
+    // Clear previous errors
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+    
+    if (!name.value.trim()) {
+      showError(name, 'お名前を入力してください');
+      isValid = false;
+    }
+    
+    if (!email.value.trim() || !isValidEmail(email.value)) {
+      showError(email, '有効なメールアドレスを入力してください');
+      isValid = false;
+    }
+    
+    if (!message.value.trim()) {
+      showError(message, 'お問い合わせ内容を入力してください');
+      isValid = false;
+    }
+    
+    if (isValid) {
+      // In a real application, you would send the form data here
+      alert('お問い合わせありがとうございます。\n担当者より折り返しご連絡いたします。');
+      form.reset();
+    }
+  });
+}
+
+function showError(input, message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message';
+  errorDiv.style.color = 'var(--color-primary-dark)';
+  errorDiv.style.fontSize = '0.875rem';
+  errorDiv.style.marginTop = '0.25rem';
+  errorDiv.textContent = message;
+  input.parentElement.appendChild(errorDiv);
+  input.style.borderColor = 'var(--color-primary-dark)';
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 /**
@@ -282,183 +384,35 @@ function animateCounter(element, target, unit) {
  */
 function initParallaxEffect() {
   const hero = document.querySelector('.hero');
-  const heroBefore = hero ? hero.querySelector('::before') : null;
   
   if (!hero) return;
   
   window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    const heroHeight = hero.offsetHeight;
+    const parallaxSpeed = 0.5;
     
-    if (scrolled < heroHeight) {
-      const elements = hero.querySelectorAll('::before, ::after');
-      elements.forEach(el => {
-        if (el.style) {
-          const speed = 0.5;
-          const yPos = -(scrolled * speed);
-          el.style.transform = `translateY(${yPos}px)`;
-        }
-      });
+    if (scrolled < window.innerHeight) {
+      hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
     }
   });
 }
 
 /**
- * Form Validation
+ * Hero Slideshow
  */
-function initFormValidation() {
-  const form = document.querySelector('.form');
+(function() {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length === 0) return;
   
-  if (!form) return;
+  let currentSlide = 0;
+  const slideInterval = 5000; // 5 seconds
   
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    let isValid = true;
-    const requiredFields = form.querySelectorAll('[required]');
-    
-    // Reset previous errors
-    form.querySelectorAll('.form__error').forEach(error => error.remove());
-    form.querySelectorAll('.form__input--error').forEach(input => {
-      input.classList.remove('form__input--error');
-    });
-    
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        isValid = false;
-        showFieldError(field, 'この項目は必須です');
-      } else if (field.type === 'email' && !isValidEmail(field.value)) {
-        isValid = false;
-        showFieldError(field, '正しいメールアドレスを入力してください');
-      }
-    });
-    
-    if (isValid) {
-      // Show success message (in real implementation, submit to server)
-      showFormSuccess(form);
-    }
-  });
-}
-
-/**
- * Show field error
- */
-function showFieldError(field, message) {
-  field.classList.add('form__input--error');
-  const error = document.createElement('p');
-  error.className = 'form__error';
-  error.textContent = message;
-  error.style.color = '#C2185B';
-  error.style.fontSize = '0.85rem';
-  error.style.marginTop = '0.25rem';
-  field.parentNode.appendChild(error);
-}
-
-/**
- * Validate email format
- */
-function isValidEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
-
-/**
- * Show form success message
- */
-function showFormSuccess(form) {
-  const successMessage = document.createElement('div');
-  successMessage.className = 'form__success';
-  successMessage.innerHTML = `
-    <div style="text-align: center; padding: 2rem; background-color: #FCE4EC; border-radius: 16px;">
-      <p style="font-size: 1.5rem; color: #333; margin-bottom: 0.5rem;">送信完了</p>
-      <p style="color: #666; line-height: 1.8;">お問い合わせありがとうございます。<br>担当者より折り返しご連絡いたします。</p>
-    </div>
-  `;
-  
-  form.innerHTML = '';
-  form.appendChild(successMessage);
-}
-
-/**
- * Set current page active in navigation
- */
-function setActiveNavLink() {
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav__link');
-  
-  navLinks.forEach(link => {
-    const linkPath = link.getAttribute('href');
-    if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// Run on page load
-setActiveNavLink();
-
-/**
- * Button hover ripple effect
- */
-document.querySelectorAll('.btn').forEach(button => {
-  button.addEventListener('click', function(e) {
-    const rect = this.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const ripple = document.createElement('span');
-    ripple.style.cssText = `
-      position: absolute;
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      pointer-events: none;
-      width: 100px;
-      height: 100px;
-      left: ${x - 50}px;
-      top: ${y - 50}px;
-      transform: scale(0);
-      animation: ripple 0.6s ease-out;
-    `;
-    
-    this.style.position = 'relative';
-    this.style.overflow = 'hidden';
-    this.appendChild(ripple);
-    
-    setTimeout(() => ripple.remove(), 600);
-  });
-});
-
-// Add ripple animation to document
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes ripple {
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
+  function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
   }
-`;
-document.head.appendChild(style);
-
-/**
- * Card hover 3D tilt effect
- */
-document.querySelectorAll('.card, .business-preview__card, .service-card').forEach(card => {
-  card.addEventListener('mousemove', function(e) {
-    const rect = this.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 20;
-    const rotateY = (centerX - x) / 20;
-    
-    this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-  });
   
-  card.addEventListener('mouseleave', function() {
-    this.style.transform = '';
-  });
-});
+  // Start slideshow
+  setInterval(nextSlide, slideInterval);
+})();

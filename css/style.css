@@ -515,17 +515,19 @@ p {
 
 .header__logo-text {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--color-text);
+  letter-spacing: 0.05em;
 }
 
 .header__logo-text span {
   display: block;
-  font-size: 0.7rem;
-  font-family: var(--font-body);
-  color: var(--color-text-light);
-  font-weight: 400;
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
 /* Navigation */
@@ -1550,6 +1552,13 @@ p {
   gap: 0.25rem;
 }
 
+.stats-bar__number[data-prefix]::before {
+  content: attr(data-prefix);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
 .stats-bar__number span {
   font-size: 1rem;
   color: var(--color-text-light);
@@ -1701,14 +1710,29 @@ p {
   font-size: 1.25rem;
   color: var(--color-white);
   margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer__logo-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.footer__logo-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .footer__logo span {
-  display: block;
-  font-size: 0.75rem;
-  font-family: var(--font-body);
-  opacity: 0.7;
-  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
 }
 
 .footer__info {
@@ -1814,14 +1838,14 @@ p {
 
 /* Fade In Animation */
 .fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: none !important;
 }
 
 .fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 /* Slide In Animation */
@@ -1962,24 +1986,35 @@ p {
 }
 
 .greeting-signature {
-  text-align: right;
-  margin-top: var(--spacing-lg);
+  text-align: left;
+  margin: 2rem 0 2rem auto;
+  max-width: 450px;
   font-family: var(--font-heading);
-  padding: 3rem;
+  padding: 1.25rem 1.5rem;
   background: linear-gradient(135deg, #fff 0%, #fff 100%);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(233, 30, 99, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e8e8e8;
 }
 
 .greeting-signature p {
   margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .greeting-signature .name {
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--color-primary-dark);
+  white-space: nowrap;
+}
+
+.greeting-signature img {
+  width: auto;
+  max-width: 170px;
+  height: auto;
+  display: block;
 }
 
 @media (max-width: 768px) {
@@ -2851,4 +2886,28 @@ p {
   .service-flow__step {
     width: 100%;
   }
+}
+
+/* ========================================
+   index.htmlの統計バーと事業カードのアニメーション無効化
+   ======================================== */
+/* 統計バーと事業カードは最初から表示 */
+.stats-bar,
+.stats-bar *,
+.stats-bar__inner,
+.stats-bar__item,
+.business-preview,
+.business-preview *,
+.business-preview__card,
+.section__header {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: none !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+
+/* stats-bar__numberのみカウントアップを許可 */
+.stats-bar__number {
+  /* カウントアップアニメーションは保持 */
 }

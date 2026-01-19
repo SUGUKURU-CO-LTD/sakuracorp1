@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* News Page Specific Styles */
-    
+
     /* News Tab System */
     .news-tabs {
       display: flex;
@@ -23,7 +23,7 @@
       margin-bottom: 3rem;
       flex-wrap: wrap;
     }
-    
+
     .news-tab {
       padding: 1rem 2rem;
       background: var(--color-white);
@@ -37,7 +37,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .news-tab::before {
       content: '';
       position: absolute;
@@ -45,59 +45,60 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transition: left var(--transition-slow);
     }
-    
+
     .news-tab:hover::before {
       left: 100%;
     }
-    
+
     .news-tab:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
-    
+
     .news-tab.active {
       background: linear-gradient(135deg, var(--color-primary-dark), var(--color-accent));
       border-color: var(--color-primary-dark);
       color: var(--color-white);
     }
-    
+
     .news-tab .count {
       display: inline-block;
-      background: rgba(0,0,0,0.1);
+      background: rgba(0, 0, 0, 0.1);
       padding: 0.2rem 0.5rem;
       border-radius: 10px;
       font-size: 0.8rem;
       margin-left: 0.5rem;
     }
-    
+
     .news-tab.active .count {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
     }
-    
+
     /* News Section */
     .news-section {
       display: none;
     }
-    
+
     .news-section.active {
       display: block;
       animation: fadeIn 0.5s ease;
     }
-    
+
     @keyframes fadeIn {
       from {
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
+
     .news-section__header {
       display: flex;
       align-items: center;
@@ -106,7 +107,7 @@
       padding-bottom: 1rem;
       border-bottom: 2px solid var(--color-primary-light);
     }
-    
+
     .news-section__title {
       font-size: 1.5rem;
       color: var(--color-primary-dark);
@@ -114,7 +115,7 @@
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .news-section__title::before {
       content: '';
       width: 8px;
@@ -122,7 +123,7 @@
       background: var(--color-primary-dark);
       border-radius: 50%;
     }
-    
+
     .year-badge {
       background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
       color: var(--color-white);
@@ -131,7 +132,7 @@
       font-size: 0.9rem;
       font-weight: 600;
     }
-    
+
     /* Enhanced News Card */
     .news-card-enhanced {
       background: var(--color-white);
@@ -146,7 +147,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .news-card-enhanced::before {
       content: '';
       position: absolute;
@@ -157,16 +158,16 @@
       background: linear-gradient(180deg, var(--color-primary), var(--color-primary-dark));
       transition: width var(--transition-normal);
     }
-    
+
     .news-card-enhanced:hover {
       transform: translateX(8px);
       box-shadow: var(--shadow-md);
     }
-    
+
     .news-card-enhanced:hover::before {
       width: 6px;
     }
-    
+
     .news-card-enhanced__meta {
       display: flex;
       align-items: center;
@@ -174,14 +175,14 @@
       margin-bottom: 0.75rem;
       flex-wrap: wrap;
     }
-    
+
     .news-card-enhanced__date {
       font-size: 0.95rem;
       color: var(--color-primary-dark);
       font-weight: 600;
       font-family: var(--font-heading);
     }
-    
+
     .news-card-enhanced__category {
       font-size: 0.75rem;
       background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
@@ -190,12 +191,12 @@
       border-radius: 20px;
       font-weight: 500;
     }
-    
+
     .news-card-enhanced__category--archive {
       background: var(--color-text-light);
       color: var(--color-white);
     }
-    
+
     .news-card-enhanced__title {
       color: var(--color-text);
       font-weight: 600;
@@ -204,17 +205,17 @@
       margin-bottom: 0.5rem;
       transition: color var(--transition-fast);
     }
-    
+
     .news-card-enhanced:hover .news-card-enhanced__title {
       color: var(--color-primary-dark);
     }
-    
+
     .news-card-enhanced__excerpt {
       color: var(--color-text-light);
       font-size: 0.9rem;
       line-height: 1.7;
     }
-    
+
     /* Archive Section */
     .archive-section {
       background: linear-gradient(135deg, var(--color-bg-light) 0%, #fff 50%, var(--color-bg-light) 100%);
@@ -222,18 +223,18 @@
       margin-top: 3rem;
       border-radius: 24px;
     }
-    
+
     .archive-section .section__header {
       margin-bottom: 2rem;
     }
-    
+
     /* Social Links Section */
     .social-section {
       background: linear-gradient(135deg, #FCE4EC 0%, #fff 100%);
       padding: 4rem 0;
       text-align: center;
     }
-    
+
     .social-cards {
       display: flex;
       justify-content: center;
@@ -241,7 +242,7 @@
       flex-wrap: wrap;
       margin-top: 2rem;
     }
-    
+
     .social-card {
       background: var(--color-white);
       border-radius: 20px;
@@ -255,7 +256,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .social-card::before {
       content: '';
       position: absolute;
@@ -268,16 +269,16 @@
       transform-origin: left;
       transition: transform var(--transition-normal);
     }
-    
+
     .social-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
     }
-    
+
     .social-card:hover::before {
       transform: scaleX(1);
     }
-    
+
     .social-card__icon {
       width: 70px;
       height: 70px;
@@ -289,39 +290,39 @@
       font-size: 2rem;
       transition: transform var(--transition-normal);
     }
-    
+
     .social-card:hover .social-card__icon {
       transform: scale(1.1) rotate(5deg);
     }
-    
+
     .social-card__icon--tiktok {
       background: linear-gradient(135deg, #000000, #333333);
       color: #fff;
     }
-    
+
     .social-card__icon--instagram {
       background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045);
       color: #fff;
     }
-    
+
     .social-card__icon--youtube {
       background: linear-gradient(135deg, #FF0000, #CC0000);
       color: #fff;
     }
-    
+
     .social-card__title {
       font-size: 1.25rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       color: var(--color-text);
     }
-    
+
     .social-card__text {
       font-size: 0.95rem;
       color: var(--color-text-light);
       line-height: 1.6;
     }
-    
+
     /* Academy Banner */
     .academy-banner {
       background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-accent) 100%);
@@ -337,7 +338,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .academy-banner::before {
       content: '';
       position: absolute;
@@ -345,10 +346,10 @@
       right: -20%;
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       border-radius: 50%;
     }
-    
+
     .academy-banner::after {
       content: '🌸';
       position: absolute;
@@ -358,35 +359,35 @@
       font-size: 4rem;
       opacity: 0.3;
     }
-    
+
     @media (max-width: 768px) {
       .academy-banner {
         flex-direction: column;
         text-align: center;
       }
-      
+
       .academy-banner::after {
         display: none;
       }
     }
-    
+
     .academy-banner__content {
       position: relative;
       z-index: 1;
     }
-    
+
     .academy-banner__content h3 {
       color: #fff;
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
     }
-    
+
     .academy-banner__content p {
       opacity: 0.95;
       font-size: 1rem;
       line-height: 1.6;
     }
-    
+
     .academy-banner .btn {
       position: relative;
       z-index: 1;
@@ -395,12 +396,12 @@
       white-space: nowrap;
       font-weight: 600;
     }
-    
+
     .academy-banner .btn:hover {
       background: var(--color-primary-light);
       transform: translateY(-3px);
     }
-    
+
     /* Pagination */
     .news-pagination {
       display: flex;
@@ -408,7 +409,7 @@
       gap: 0.5rem;
       margin-top: 2rem;
     }
-    
+
     .news-pagination__btn {
       width: 40px;
       height: 40px;
@@ -420,19 +421,19 @@
       transition: all var(--transition-fast);
       color: var(--color-text);
     }
-    
+
     .news-pagination__btn:hover,
     .news-pagination__btn.active {
       background: var(--color-primary-dark);
       border-color: var(--color-primary-dark);
       color: #fff;
     }
-    
+
     /* Month Group */
     .news-month-group {
       margin-bottom: 2rem;
     }
-    
+
     .news-month-group__header {
       display: flex;
       align-items: center;
@@ -441,13 +442,13 @@
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--color-primary-light);
     }
-    
+
     .news-month-group__title {
       font-size: 1.2rem;
       color: var(--color-primary-dark);
       font-weight: 600;
     }
-    
+
     .news-month-group__line {
       flex: 1;
       height: 1px;
@@ -470,7 +471,6 @@
           </svg>
         </div>
         <div class="header__logo-text">
-          SAKURA東海<br>
           <span>株式会社SAKURA東海コーポレーション</span>
         </div>
       </a>
@@ -482,10 +482,10 @@
         </button>
         <ul class="nav__list">
           <li><a href="index.html" class="nav__link">ホーム</a></li>
-          <li><a href="about.html" class="nav__link">会社概要</a></li>
           <li><a href="service.html" class="nav__link">事業内容</a></li>
           <li><a href="school.html" class="nav__link">登録支援機関</a></li>
           <li><a href="news.html" class="nav__link active">お知らせ</a></li>
+          <li><a href="about.html" class="nav__link">会社概要</a></li>
           <li><a href="recruit.html" class="nav__link is-hidden">採用情報</a></li>
           <li><a href="contact.html" class="nav__link">お問い合わせ</a></li>
         </ul>
@@ -508,7 +508,7 @@
     <section class="section">
       <div class="container">
         <div style="max-width: 900px; margin: 0 auto;">
-          
+
           <!-- Academy News Banner -->
           <div class="academy-banner fade-in">
             <div class="academy-banner__content">
@@ -516,10 +516,10 @@
               <p>学園の活動や行事の様子をチェック！</p>
             </div>
             <a href="https://sakura-tokai.jp/" class="btn" target="_blank" rel="noopener">
-              学園公式サイトへ →
+              SAKURA東海国際学園公式サイトへ →
             </a>
           </div>
-          
+
           <!-- News Tabs -->
           <div class="news-tabs fade-in">
             <button class="news-tab active" data-tab="2025">
@@ -529,21 +529,21 @@
               アーカイブ <span class="count">∞</span>
             </button>
           </div>
-          
+
           <!-- 2025 News Section -->
           <div id="news-2025" class="news-section active fade-in">
             <div class="news-section__header">
               <h2 class="news-section__title">2025年</h2>
               <span class="year-badge">LATEST NEWS</span>
             </div>
-            
+
             <!-- December 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年12月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/12/17/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e4%bc%91%e5%9c%92%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -553,7 +553,7 @@
                 <div class="news-card-enhanced__title">年末年始休園のお知らせ</div>
                 <p class="news-card-enhanced__excerpt">年末年始の休園期間についてご案内いたします。</p>
               </a>
-              
+
               <a href="https://sakura-tokai.jp/2025/12/03/sakura%e5%bf%98%e5%b9%b4%e4%bc%9a%ef%bc%81/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -564,14 +564,14 @@
                 <p class="news-card-enhanced__excerpt">SAKURA東海国際学園の忘年会の様子をお届けします。</p>
               </a>
             </div>
-            
+
             <!-- October 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年10月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/10/21/2025%e5%b9%b410%e6%9c%88%e3%80%80day-of-fun%ef%bc%81/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -581,7 +581,7 @@
                 <div class="news-card-enhanced__title">2025年10月 Day of fun！</div>
                 <p class="news-card-enhanced__excerpt">学園の楽しいイベントの様子をご紹介します。</p>
               </a>
-              
+
               <a href="https://sakura-tokai.jp/2025/10/03/sakura%e3%81%ae%e8%87%aa%e5%b7%b1%e7%b4%b9%e4%bb%8b%e3%82%b7%e3%83%bc%e3%83%88/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -592,14 +592,14 @@
                 <p class="news-card-enhanced__excerpt">SAKURAの生徒たちの自己紹介シートをご紹介。</p>
               </a>
             </div>
-            
+
             <!-- September 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年9月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/09/09/%e6%b6%88%e7%81%ab%e8%a8%93%e7%b7%b4/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -610,14 +610,14 @@
                 <p class="news-card-enhanced__excerpt">学園での消火訓練の様子をお伝えします。</p>
               </a>
             </div>
-            
+
             <!-- July 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年7月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/07/31/%e5%a4%8f%e5%ad%a3%e4%bc%91%e6%9a%87%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b-3/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -627,7 +627,7 @@
                 <div class="news-card-enhanced__title">夏季休暇のお知らせ</div>
                 <p class="news-card-enhanced__excerpt">夏季休暇期間のご案内です。</p>
               </a>
-              
+
               <a href="https://sakura-tokai.jp/2025/07/31/%e5%85%a5%e5%9b%bd%e3%80%81%e5%85%a5%e5%9c%92%e3%83%a9%e3%83%83%e3%82%b7%e3%83%a5%ef%bc%81%ef%bc%81/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -638,14 +638,14 @@
                 <p class="news-card-enhanced__excerpt">たくさんの新入生が入園しました！</p>
               </a>
             </div>
-            
+
             <!-- June 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年6月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/06/16/%e8%a6%81%e6%b3%a8%e6%84%8f%ef%bc%81%ef%bc%81%ef%bc%81/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -656,14 +656,14 @@
                 <p class="news-card-enhanced__excerpt">皆さんへの重要なお知らせです。</p>
               </a>
             </div>
-            
+
             <!-- May 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年5月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="#" class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
                   <span class="news-card-enhanced__date">2025.05.16</span>
@@ -673,14 +673,14 @@
                 <p class="news-card-enhanced__excerpt">日頃への感謝の気持ちを込めて。</p>
               </a>
             </div>
-            
+
             <!-- April 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年4月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/04/25/%e3%82%b4%e3%83%bc%e3%83%ab%e3%83%87%e3%83%b3%e3%82%a6%e3%82%a3%e3%83%bc%e3%82%af%e4%bc%91%e6%9a%87%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -691,14 +691,14 @@
                 <p class="news-card-enhanced__excerpt">ゴールデンウィークの休園期間のご案内です。</p>
               </a>
             </div>
-            
+
             <!-- March 2025 -->
             <div class="news-month-group">
               <div class="news-month-group__header">
                 <h3 class="news-month-group__title">2025年3月</h3>
                 <div class="news-month-group__line"></div>
               </div>
-              
+
               <a href="https://sakura-tokai.jp/2025/03/18/sakura%e6%9d%b1%e6%b5%b7%e5%9b%bd%e9%9a%9b%e5%ad%a6%e5%9c%92%e3%80%80%e6%81%92%e4%be%a1%e3%80%80day-of-fun%ef%bc%812025%e5%b9%b43%e6%9c%88%e7%b7%a8/"
                 class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
@@ -708,7 +708,7 @@
                 <div class="news-card-enhanced__title">SAKURA東海国際学園 恒例 Day of Fun！2025年3月編</div>
                 <p class="news-card-enhanced__excerpt">恒例のDay of Fun！2025年3月の様子をお届けします。</p>
               </a>
-              
+
               <a href="#" class="news-card-enhanced" target="_blank" rel="noopener">
                 <div class="news-card-enhanced__meta">
                   <span class="news-card-enhanced__date">2025.03.11</span>
@@ -719,7 +719,7 @@
               </a>
             </div>
           </div>
-          
+
           <!-- Archive Section -->
           <div id="news-archive" class="news-section fade-in">
             <div class="archive-section">
@@ -730,16 +730,17 @@
                 </div>
                 <p class="fade-in" style="text-align: center; color: var(--color-text-light); margin-bottom: 2rem;">
                   了过去に掲載されたお知らせのアーカイブです。<br>
-                  詳細を知りたい方は<a href="https://sakura-tokai.jp/" target="_blank" rel="noopener">SAKURA東海国際学園公式サイト</a>をご覧ください。
+                  詳細を知りたい方は<a href="https://sakura-tokai.jp/" target="_blank"
+                    rel="noopener">SAKURA東海国際学園公式サイト</a>をご覧ください。
                 </p>
-                
+
                 <!-- 2024年 -->
                 <div class="news-month-group" style="padding: 0 1rem;">
                   <div class="news-month-group__header">
                     <h3 class="news-month-group__title">2024年</h3>
                     <div class="news-month-group__line"></div>
                   </div>
-                  
+
                   <a href="#" class="news-card-enhanced" style="opacity: 0.7;">
                     <div class="news-card-enhanced__meta">
                       <span class="news-card-enhanced__date">2024.12.xx</span>
@@ -748,7 +749,7 @@
                     <div class="news-card-enhanced__title">年末年始休園のお知らせ（2024年度）</div>
                     <p class="news-card-enhanced__excerpt">過去の年末年始休園情報です。</p>
                   </a>
-                  
+
                   <a href="#" class="news-card-enhanced" style="opacity: 0.7;">
                     <div class="news-card-enhanced__meta">
                       <span class="news-card-enhanced__date">2024.07.xx</span>
@@ -757,7 +758,7 @@
                     <div class="news-card-enhanced__title">夏季休暇のお知らせ（2024年度）</div>
                     <p class="news-card-enhanced__excerpt">過去の夏季休暇情報です。</p>
                   </a>
-                  
+
                   <a href="#" class="news-card-enhanced" style="opacity: 0.7;">
                     <div class="news-card-enhanced__meta">
                       <span class="news-card-enhanced__date">2024.04.xx</span>
@@ -767,28 +768,28 @@
                     <p class="news-card-enhanced__excerpt">過去のゴールデンウィーク休園情報です。</p>
                   </a>
                 </div>
-                
+
                 <!-- 2023年以前 -->
                 <div class="news-month-group" style="padding: 0 1rem;">
                   <div class="news-month-group__header">
                     <h3 class="news-month-group__title">2023年以前</h3>
                     <div class="news-month-group__line"></div>
                   </div>
-                  
+
                   <p style="color: var(--color-text-light); text-align: center; padding: 2rem;">
                     2023年以前のおしらせは、SAKURA東海国際学園公式サイトでご確認ください。
                   </p>
-                  
+
                   <div style="text-align: center; margin-top: 1rem;">
                     <a href="https://sakura-tokai.jp/" class="btn btn--outline" target="_blank" rel="noopener">
-                      学園公式サイトで過去の記事を探す →
+                      SAKURA東海国際学園公式サイトで過去の記事を探す →
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -800,7 +801,8 @@
           <h2 class="section__title">SNSをフォロー</h2>
           <p class="section__subtitle">FOLLOW US</p>
         </div>
-        <p class="fade-in" style="color: var(--color-text-light); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <p class="fade-in"
+          style="color: var(--color-text-light); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
           SAKURA東海国際学園の日常や最新情報をSNSでも発信中！
           実習生の様子やイベントの魅力を動画でチェック。
         </p>
@@ -819,26 +821,19 @@
             <h3 class="social-card__title">Instagram</h3>
             <p class="social-card__text">写真で学園の様子をお届け。イベントの写真を多数掲載</p>
           </a>
-          <a href="https://www.youtube.com/@sakura-tokai" class="social-card" target="_blank" rel="noopener">
-            <div class="social-card__icon social-card__icon--youtube">
-              <span>▶</span>
-            </div>
-            <h3 class="social-card__title">YouTube</h3>
-            <p class="social-card__text">学園紹介動画やイベント動画を発信中</p>
-          </a>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
     <section class="cta">
-      class="container">
-        <h2 class="cta__title">お気軽にご相談ください</h2>
-        <p class="cta__text">
-          外国人材の受入れに関するご相談など、<br>
-          に関するお問い合わせなどお気軽にご連絡ください。
-        </p>
-        <a href="contact.html" class="btn btn--primary">お問い合わせはこちら</a>
+      <div class="container">
+      <h2 class="cta__title">お気軽にご相談ください</h2>
+      <p class="cta__text">
+        外国人材の受入れに関するご相談、サービスに関するお問い合わせなど、<br>
+        お気軽にご連絡ください。
+      </p>
+      <a href="contact.html" class="btn btn--primary">お問い合わせはこちら</a>
       </div>
     </section>
   </main>
@@ -849,11 +844,19 @@
       <div class="footer__inner">
         <div class="footer__company">
           <div class="footer__logo">
-            SAKURA東海
-            <span>株式会社SAKURA東海コーポレーション</span>
+            <div class="footer__logo-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="22" fill="#FCE4EC" />
+                <path d="M24 8C24 8 28 14 28 20C28 26 24 32 24 32C24 32 20 26 20 20C20 14 24 8 24 8Z" fill="#F8BBD9" />
+                <path d="M12 20C12 20 18 24 24 24C30 24 36 20 36 20C36 20 30 28 24 28C18 28 12 20 12 20Z" fill="#E91E63" />
+                <circle cx="24" cy="22" r="4" fill="#C2185B" />
+              </svg>
+            </div>
+            <span>株式会社<br>SAKURA東海コーポレーション</span>
           </div>
           <div class="footer__info">
-            〒446-0059 愛知県安城市三河安城本日2丁目11番地7 錦見ビル5F-A<br>
+            〒446-0059<br>
+            愛知県安城市三河安城本町2丁目11番地7 錦見ビル5F-A<br>
             TEL: 0566-45-5597<br>
             FAX: 0566-45-5591
           </div>
@@ -877,16 +880,14 @@
           </ul>
         </div>
         <div class="footer__nav">
-          <h4 class="footer__title">外部リンク</h4>
+          <h4 class="footer__title">外部リンク・SNS</h4>
           <ul class="footer__links">
             <li><a href="https://sakura-tokai.jp/" class="footer__link" target="_blank"
-                rel="noopener">SAKURA東海国際学園公式サイト</a></li>
-            <li><a href="https://www.tiktok.com/@sakura.tokai" class="footer__link" target="_blank"
-                rel="noopener">TikTok</a></li>
+                rel="noopener">SAKURA東海国際学園</a></li>
             <li><a href="https://www.instagram.com/sakura.tokai/" class="footer__link" target="_blank"
                 rel="noopener">Instagram</a></li>
-            <li><a href="https://www.youtube.com/@sakura-tokai" class="footer__link" target="_blank"
-                rel="noopener">YouTube</a></li>
+            <li><a href="https://www.tiktok.com/@sakura.tokai" class="footer__link" target="_blank"
+                rel="noopener">TikTok</a></li>
           </ul>
         </div>
       </div>
@@ -897,21 +898,21 @@
   </footer>
 
   <script src="js/main.js"></script>
-  
+
   <script>
     // News Tab Functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const tabs = document.querySelectorAll('.news-tab');
       const sections = document.querySelectorAll('.news-section');
-      
+
       tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function () {
           const targetTab = this.dataset.tab;
-          
+
           // Update active tab
           tabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
-          
+
           // Update active section
           sections.forEach(s => {
             s.classList.remove('active');
