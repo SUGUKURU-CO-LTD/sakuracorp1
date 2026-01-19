@@ -380,17 +380,20 @@ function isValidEmail(email) {
 }
 
 /**
- * Parallax Effect for Hero Section
+ * Parallax Effect for Hero Section - 無効化
  */
 function initParallaxEffect() {
+  // パララックス効果を無効化
+  return;
+
   const hero = document.querySelector('.hero');
-  
+
   if (!hero) return;
-  
+
   window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallaxSpeed = 0.5;
-    
+
     if (scrolled < window.innerHeight) {
       hero.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
     }

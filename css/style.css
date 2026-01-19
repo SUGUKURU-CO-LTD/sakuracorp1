@@ -1761,9 +1761,10 @@ p {
 }
 
 .footer__links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem 1.5rem;
+  max-width: 400px;
 }
 
 .footer__link {
@@ -1790,6 +1791,35 @@ p {
 
 .footer__link:hover::before {
   opacity: 1;
+}
+
+/* SNS Icons */
+.footer__social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.footer__social-link:hover {
+  background: var(--color-primary);
+  transform: translateY(-3px);
+}
+
+.footer__social-link svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-white);
 }
 
 .footer__bottom {
@@ -2052,8 +2082,8 @@ p {
 }
 
 .service-flow__step:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+  transform: none !important;
+  box-shadow: var(--shadow-sm);
 }
 
 .service-flow__step:not(:last-child)::after {
@@ -2287,8 +2317,8 @@ p {
 }
 
 .business-preview__card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(233, 30, 99, 0.15);
+  transform: none !important;
+  box-shadow: var(--shadow-lg);
 }
 
 .business-preview__card:hover::before {
@@ -2359,7 +2389,7 @@ p {
 }
 
 .school-banner__icon:hover {
-  transform: rotate(5deg) scale(1.05);
+  transform: none;
 }
 
 .school-banner__icon svg {
@@ -2891,7 +2921,7 @@ p {
 /* ========================================
    index.htmlの統計バーと事業カードのアニメーション無効化
    ======================================== */
-/* 統計バーと事業カードは最初から表示 */
+/* 統計バーと事業カードは最初から表示 - 完全無効化 */
 .stats-bar,
 .stats-bar *,
 .stats-bar__inner,
@@ -2899,9 +2929,19 @@ p {
 .business-preview,
 .business-preview *,
 .business-preview__card,
-.section__header {
+.business-preview__card *,
+.section__header,
+.section__header *,
+.service-flow,
+.service-flow *,
+.service-flow__step,
+.school-banner,
+.school-banner *,
+.school-banner__inner,
+.school-banner__icon,
+.school-banner__content {
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: none !important;
   transition: none !important;
   animation: none !important;
   will-change: auto !important;
@@ -2910,4 +2950,9 @@ p {
 /* stats-bar__numberのみカウントアップを許可 */
 .stats-bar__number {
   /* カウントアップアニメーションは保持 */
+}
+
+/* ヒーローセクションのパララックス無効化 */
+.hero {
+  transform: none !important;
 }
