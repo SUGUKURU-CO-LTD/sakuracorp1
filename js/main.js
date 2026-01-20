@@ -419,3 +419,77 @@ function initParallaxEffect() {
   // Start slideshow
   setInterval(nextSlide, slideInterval);
 })();
+
+/**
+ * SAKURA東海国際学園のWordPressから最新記事を自動取得
+ */
+async function updateNewsFromWordPress() {
+  try {
+    // RSS to JSON API を使用（CORS回避）
+    const rssUrl = 'https://sakura-tokai.jp/feed/';
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    
+    console.log('学園のRSSを取得中...');
+    
+    // RSSを取得
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    
+    if (data.status !== 'ok') {
+      console.error('RSS取得エラー:', data.message);
+      return;
+    }
+    
+    console.log('記事を取得しました:', data.items.length + '件');
+    
+    // 最新3件を取得
+    const latestArticles = data.items.slice(0, 3);
+    
+    // news.htmlの表示エリアを取得
+    const newsContainer = document.querySelector('.news-list');
+    
+    if (!newsContainer) {
+      console.log('news-listが見つかりません（このページはnews.htmlではない）');
+      return;
+    }
+    
+    // HTMLをクリア
+    newsContainer.innerHTML = '';
+    
+    // 記事を表示
+    latestArticles.forEach(article => {
+      // 日付をフォーマット（YYYY.MM.DD形式）
+      const date = new Date(article.pubDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const formattedDate = `${year}.${month}.${day}`;
+      
+      // HTML要素を作成
+      const newsItem = document.createElement('div');
+      newsItem.className = 'news-item fade-in';
+      
+      newsItem.innerHTML = `
+        <a href="${article.link}" target="_blank" rel="noopener noreferrer">
+          <span class="news-date">${formattedDate}</span>
+          <h3 class="news-title">${article.title}</h3>
+        </a>
+      `;
+      
+      newsContainer.appendChild(newsItem);
+    });
+    
+    console.log('✅ ニュース更新完了:', latestArticles.length + '件表示');
+    
+  } catch (error) {
+    console.error('❌ ニュース取得エラー:', error);
+  }
+}
+
+// ページ読み込み時にニュース取得を実行
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.querySelector('.news-list')) {
+    console.log('news.htmlを検出。学園の最新記事を取得します...');
+    updateNewsFromWordPress();
+  }
+});

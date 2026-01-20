@@ -429,6 +429,55 @@
       color: #fff;
     }
 
+    /* Latest News List (Auto-fetched from WordPress) */
+    .news-list {
+      background: linear-gradient(135deg, #fff8e1 0%, #fff 100%);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 2px solid var(--color-primary-light);
+    }
+
+    .news-list .news-item {
+      padding: 1rem;
+      border-bottom: 1px solid var(--color-primary-light);
+      transition: all 0.3s ease;
+    }
+
+    .news-list .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-list .news-item:hover {
+      background: rgba(255, 182, 193, 0.1);
+      border-radius: 8px;
+    }
+
+    .news-list .news-item a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .news-list .news-date {
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--color-primary-dark);
+      font-weight: 600;
+      margin-right: 1rem;
+    }
+
+    .news-list .news-title {
+      display: inline;
+      font-size: 1rem;
+      color: var(--color-text);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .news-list .news-item:hover .news-title {
+      color: var(--color-primary-dark);
+    }
+
     /* Month Group */
     .news-month-group {
       margin-bottom: 2rem;
@@ -463,12 +512,7 @@
     <div class="header__inner">
       <a href="index.html" class="header__logo">
         <div class="header__logo-icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="22" fill="#FCE4EC" />
-            <path d="M24 8C24 8 28 14 28 20C28 26 24 32 24 32C24 32 20 26 20 20C20 14 24 8 24 8Z" fill="#F8BBD9" />
-            <path d="M12 20C12 20 18 24 24 24C30 24 36 20 36 20C36 20 30 28 24 28C18 28 12 20 12 20Z" fill="#E91E63" />
-            <circle cx="24" cy="22" r="4" fill="#C2185B" />
-          </svg>
+          <img src="images/sakuralogo3.png" alt="SAKURA東海コーポレーション ロゴ" style="width: 40px; height: 40px; object-fit: contain;">
         </div>
         <div class="header__logo-text">
           <span>株式会社SAKURA東海コーポレーション</span>
@@ -518,6 +562,16 @@
             <a href="https://sakura-tokai.jp/" class="btn" target="_blank" rel="noopener">
               SAKURA東海国際学園公式サイトへ →
             </a>
+          </div>
+
+          <!-- 最新記事（WordPressから自動取得） -->
+          <div class="news-section__header" style="margin-top: 2rem;">
+            <h2 class="news-section__title">🆕 最新記事</h2>
+            <span class="year-badge">AUTO UPDATE</span>
+          </div>
+          <div class="news-list fade-in" style="margin-bottom: 2rem;">
+            <!-- WordPressから自動取得した記事がここに表示されます -->
+            <p style="text-align: center; color: var(--color-text-light);">記事を読み込み中...</p>
           </div>
 
           <!-- News Tabs -->
@@ -845,12 +899,7 @@
         <div class="footer__company">
           <div class="footer__logo">
             <div class="footer__logo-icon">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="22" fill="#FCE4EC" />
-                <path d="M24 8C24 8 28 14 28 20C28 26 24 32 24 32C24 32 20 26 20 20C20 14 24 8 24 8Z" fill="#F8BBD9" />
-                <path d="M12 20C12 20 18 24 24 24C30 24 36 20 36 20C36 20 30 28 24 28C18 28 12 20 12 20Z" fill="#E91E63" />
-                <circle cx="24" cy="22" r="4" fill="#C2185B" />
-              </svg>
+              <img src="images/sakuralogo3.png" alt="SAKURA東海コーポレーション ロゴ" style="width: 36px; height: 36px; object-fit: contain;">
             </div>
             <span>株式会社<br>SAKURA東海コーポレーション</span>
           </div>
