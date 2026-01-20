@@ -486,10 +486,81 @@ async function updateNewsFromWordPress() {
   }
 }
 
+/**
+ * ホームページ用：最新記事を取得して表示
+ */
+async function updateHomeNews() {
+  try {
+    const rssUrl = 'https://sakura-tokai.jp/feed/';
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    
+    console.log('ホーム用：学園のRSSを取得中...');
+    
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    
+    if (data.status !== 'ok') {
+      console.error('RSS取得エラー:', data.message);
+      return;
+    }
+    
+    // 最新3件を取得
+    const latestArticles = data.items.slice(0, 3);
+    
+    // ホームページの表示エリアを取得
+    const homeNewsContainer = document.querySelector('.home-news-list');
+    
+    if (!homeNewsContainer) {
+      console.log('home-news-listが見つかりません');
+      return;
+    }
+    
+    // HTMLをクリア
+    homeNewsContainer.innerHTML = '';
+    
+    // 記事を表示（ホームページ用のスタイル）
+    latestArticles.forEach(article => {
+      const date = new Date(article.pubDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const formattedDate = `${year}.${month}.${day}`;
+      
+      const newsCard = document.createElement('a');
+      newsCard.href = article.link;
+      newsCard.className = 'news-card';
+      newsCard.target = '_blank';
+      newsCard.rel = 'noopener';
+      newsCard.style.cssText = 'display: block; text-decoration: none;';
+      
+      newsCard.innerHTML = `
+        <div class="news-card__meta">
+          <span class="news-card__date">${formattedDate}</span>
+        </div>
+        <div class="news-card__title">${article.title}</div>
+      `;
+      
+      homeNewsContainer.appendChild(newsCard);
+    });
+    
+    console.log('✅ ホームニュース更新完了:', latestArticles.length + '件表示');
+    
+  } catch (error) {
+    console.error('❌ ホームニュース取得エラー:', error);
+  }
+}
+
 // ページ読み込み時にニュース取得を実行
 document.addEventListener('DOMContentLoaded', function() {
+  // news.html用
   if (document.querySelector('.news-list')) {
     console.log('news.htmlを検出。学園の最新記事を取得します...');
     updateNewsFromWordPress();
+  }
+  
+  // index.html（ホーム）用
+  if (document.querySelector('.home-news-list')) {
+    console.log('index.htmlを検出。学園の最新記事を取得します...');
+    updateHomeNews();
   }
 });
