@@ -2742,6 +2742,19 @@ p {
   }
   
   /* Hero section */
+  .hero__badge {
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem;
+    white-space: normal;
+    max-width: 90%;
+    line-height: 1.5;
+  }
+  
+  .hero__company-name {
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+  
   .hero__subtitle {
     font-size: 0.95rem;
     line-height: 1.8;
