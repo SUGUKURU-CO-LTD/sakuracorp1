@@ -68,6 +68,10 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   padding-top: 70px;
+  /* Japanese text line breaking rules */
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
 }
 
 main {
@@ -78,6 +82,47 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Text wrapping for all text elements - Japanese optimized */
+p, li, a, span, div {
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  /* Prevent orphaned punctuation */
+  hanging-punctuation: allow-end;
+}
+
+/* Headings and titles - prevent awkward breaks */
+.section__title,
+.hero__title,
+.business-card__title,
+.business-preview__title,
+.cta__title,
+.news-card__title,
+.footer__title {
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  hanging-punctuation: allow-end;
+}
+
+.section__title,
+.hero__title,
+.cta__title {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Prevent orphaned punctuation in descriptions */
+.hero__subtitle,
+.business-card__description,
+.business-preview__text,
+.cta__text {
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  hanging-punctuation: allow-end;
 }
 
 iframe {
@@ -436,11 +481,21 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.4;
   color: var(--color-text);
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  hanging-punctuation: allow-end;
 }
 
 h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
+h2 { 
+  font-size: 2rem;
+  display: inline-block;
+}
+h3 { 
+  font-size: 1.5rem;
+  display: inline-block;
+}
 h4 { font-size: 1.25rem; }
 
 p {
@@ -988,6 +1043,7 @@ p {
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+  word-break: keep-all;
 }
 
 .btn::before {
@@ -1703,6 +1759,7 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
+  text-align: center;
 }
 
 .footer__logo {
@@ -1711,8 +1768,9 @@ p {
   color: var(--color-white);
   margin-bottom: var(--spacing-sm);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .footer__logo-icon {
@@ -1733,12 +1791,14 @@ p {
   color: var(--color-white);
   letter-spacing: 0.02em;
   line-height: 1.3;
+  text-align: center;
 }
 
 .footer__info {
   font-size: 0.9rem;
   line-height: 2;
   opacity: 0.9;
+  text-align: center;
 }
 
 .footer__title {
@@ -1765,6 +1825,7 @@ p {
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem 1.5rem;
   max-width: 400px;
+  margin: 0 auto;
 }
 
 .footer__link {
@@ -1773,6 +1834,7 @@ p {
   transition: all var(--transition-fast);
   position: relative;
   padding-left: 1rem;
+  text-align: left;
 }
 
 .footer__link::before {
@@ -1798,6 +1860,7 @@ p {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  justify-content: center;
 }
 
 .footer__social-link {
@@ -2054,6 +2117,35 @@ p {
   
   .greeting-photo {
     order: -1;
+  }
+  
+  .greeting-signature {
+    max-width: 100%;
+    margin: 2rem auto 0;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .greeting-signature p {
+    text-align: center !important;
+    font-size: 0.85rem;
+  }
+  
+  .greeting-signature > div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+    gap: 0.5rem;
+  }
+  
+  .greeting-signature .name {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  
+  .greeting-signature img {
+    max-width: 140px;
+    margin: 0 auto;
   }
 }
 
@@ -2552,12 +2644,95 @@ p {
   
   /* Prevent awkward line breaks in buttons */
   .btn {
-    word-break: normal;
-    overflow-wrap: normal;
+    word-break: keep-all;
+    line-break: strict;
     white-space: nowrap;
     min-width: auto;
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
+  }
+  
+  /* Header company name - 1 line */
+  .header__logo-text {
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap;
+  }
+  
+  .header__logo-text span {
+    font-size: 0.85rem !important;
+  }
+  
+  /* Footer company name - fix alignment */
+  .footer__logo {
+    text-align: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer__logo span {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .footer__logo-icon {
+    margin: 0 auto 0.5rem;
+  }
+
+  .footer__info {
+    text-align: center;
+  }
+
+  .footer__nav {
+    text-align: center;
+  }
+
+  .footer__links {
+    margin: 0 auto;
+  }
+
+  .footer__social-links {
+    justify-content: center;
+  }
+  
+  /* Section titles and subtitles */
+  .section__title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+  
+  .section__subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* Hero section */
+  .hero__subtitle {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  
+  /* Business preview cards */
+  .business-preview__title {
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+  
+  .business-preview__text {
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  
+  /* Improve text readability */
+  p {
+    line-height: 1.9;
+  }
+  
+  /* Stats bar */
+  .stats-bar__label {
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
   
   /* Mobile Navigation */
@@ -2956,3 +3131,57 @@ p {
 .hero {
   transform: none !important;
 }
+
+/* ========================================
+   Countries Grid (対応国)
+   ======================================== */
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.country-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.country-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.country-badge__flag {
+  font-size: 2.5rem;
+}
+
+.country-badge span:not(.country-badge__flag) {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .countries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .country-badge span:not(.country-badge__flag) {
+    font-size: 0.8rem;
+  }
+}
+
+/* Cache version: v12 */
