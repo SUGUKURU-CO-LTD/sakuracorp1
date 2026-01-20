@@ -2711,12 +2711,24 @@ p {
     text-align: center;
   }
 
+  .footer__title {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .footer__title::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .footer__links {
     margin: 0 auto;
+    justify-items: center;
   }
 
   .footer__social-links {
     justify-content: center;
+    padding-left: 0;
   }
   
   /* Section titles and subtitles */
@@ -3206,4 +3218,4 @@ p {
   }
 }
 
-/* Cache version: v17 */
+/* Cache version: v18 */
