@@ -1768,9 +1768,9 @@ p {
   color: var(--color-white);
   margin-bottom: var(--spacing-sm);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .footer__logo-icon {
@@ -1791,14 +1791,14 @@ p {
   color: var(--color-white);
   letter-spacing: 0.02em;
   line-height: 1.3;
-  text-align: center;
+  text-align: left;
 }
 
 .footer__info {
   font-size: 0.9rem;
   line-height: 2;
   opacity: 0.9;
-  text-align: center;
+  text-align: left;
 }
 
 .footer__title {
@@ -1807,14 +1807,16 @@ p {
   margin-bottom: var(--spacing-sm);
   color: var(--color-primary);
   position: relative;
-  display: inline-block;
+  display: block;
+  text-align: left;
+  padding-left: 1rem;
 }
 
 .footer__title::after {
   content: '';
   position: absolute;
   bottom: -4px;
-  left: 0;
+  left: 1rem;
   width: 30px;
   height: 2px;
   background: var(--color-primary-dark);
@@ -1825,7 +1827,12 @@ p {
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem 1.5rem;
   max-width: 400px;
-  margin: 0 auto;
+  justify-items: start;
+}
+
+/* SNS section title alignment */
+.footer__nav .footer__social-links {
+  padding-left: 1rem;
 }
 
 .footer__link {
@@ -1860,7 +1867,7 @@ p {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .footer__social-link {
@@ -2652,15 +2659,30 @@ p {
     font-size: 0.9rem;
   }
   
-  /* Header company name - 1 line */
+  /* Header company name - prevent overlap with hamburger */
+  .header__logo {
+    max-width: calc(100% - 60px);
+  }
+  
+  .header__logo-icon {
+    width: 32px !important;
+    height: 32px !important;
+    flex-shrink: 0;
+  }
+  
+  .header__logo-icon svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
   .header__logo-text {
-    font-size: 0.75rem !important;
-    line-height: 1.2 !important;
+    font-size: 0.65rem !important;
+    line-height: 1.3 !important;
     white-space: nowrap;
   }
   
   .header__logo-text span {
-    font-size: 0.85rem !important;
+    font-size: 0.7rem !important;
   }
   
   /* Footer company name - fix alignment */
@@ -3184,4 +3206,4 @@ p {
   }
 }
 
-/* Cache version: v12 */
+/* Cache version: v17 */
