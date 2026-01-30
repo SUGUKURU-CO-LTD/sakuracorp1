@@ -11,7 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/style.css?v=20">
   <style>
     /* Business Cards Enhanced */
     .business-cards {
@@ -471,10 +471,9 @@
         <ul class="nav__list">
           <li><a href="index.html" class="nav__link">ホーム</a></li>
           <li><a href="service.html" class="nav__link active">事業内容</a></li>
-          <li><a href="school.html" class="nav__link">登録支援機関</a></li>
           <li><a href="news.html" class="nav__link">お知らせ</a></li>
           <li><a href="about.html" class="nav__link">会社概要</a></li>
-          <li><a href="recruit.html" class="nav__link is-hidden">採用情報</a></li>
+          <li class="is-hidden"><a href="recruit.html" class="nav__link">採用情報</a></li>
           <li><a href="contact.html" class="nav__link">お問い合わせ</a></li>
         </ul>
       </nav>
@@ -556,7 +555,7 @@
             </div>
             <h3 class="business-card__title">外国人材管理事業</h3>
             <p class="business-card__description">
-              技能実習生の一貫した管理業務を担当。<br>
+              技能実習生の一貫した生活に関する管理業務を行います。<br>
               生活指導、日本語学習支援など、<br>
               外国人材が円滑に仕事に取り組めるよう全面的にバックアップいたします。</p>
             <ul class="business-card__features">
@@ -578,13 +577,13 @@
             <h3 class="business-card__title">登録支援機関事業</h3>
             <p class="business-card__description">
               出入国在留管理庁に登録された登録支援機関として、<br>
-              外国人材の受入れ企業を包括的にサポート。<br>
-              行政手続き支援、生活サポート、日本語学習指導、企業様への相談対応など<br>
-              一号支援業務をワンストップで提供いたします。</p>
+              外国人材を包括的にサポート。<br>
+              行政手続き支援、生活サポート、日本語学習指導など、<br>
+              支援業務をワンストップで提供いたします。企業様のご相談にも対応します。</p>
             <ul class="business-card__features">
               <li>出入国在留管理庁の認定登録支援機関</li>
               <li>募集・教育・採用・管理の一貫体制</li>
-              <li>行政的支援・生活支援のサポート、企業様への相談対応</li>
+              <li>行政的支援・生活支援のサポート</li>
             </ul>
           </div>
 
@@ -778,6 +777,27 @@
     <!-- Link to School -->
     <section class="section section--light" style="padding-top: 5rem;">
       <div class="container">
+        <!-- Link to Support Organization -->
+        <div style="margin-bottom: 4rem;">
+          <a href="school.html" class="school-link-card fade-in">
+            <div class="school-link-card__icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+              </svg>
+            </div>
+            <div class="school-link-card__content">
+              <h3 class="school-link-card__title">登録支援機関事業について</h3>
+              <p class="school-link-card__description">
+                出入国在留管理庁に登録された登録支援機関として、外国人材の受入れから定着まで総合的に支援いたします。
+                技能実習生や特定技能外国人の受入れ支援について、詳しくはこちらをご覧ください。
+              </p>
+              <span class="btn btn--primary" style="display: inline-block;">
+                登録支援機関について詳しく見る →
+              </span>
+            </div>
+          </a>
+        </div>
+
         <a href="https://sakura-tokai.jp/" class="school-link-card fade-in" target="_blank" rel="noopener">
           <div class="school-link-card__icon">
             <svg viewBox="0 0 24 24">
@@ -824,7 +844,7 @@
           </div>
           <div class="footer__info">
             〒446-0059<br>
-            愛知県安城市三河安城本町2丁目11番地7 錦見ビル5F-A<br>
+            愛知県安城市三河安城本町2丁目<br>11番地7 錦見ビル5F-A<br>
             TEL: 0566-45-5597<br>
             FAX: 0566-45-5591
           </div>
@@ -834,7 +854,6 @@
           <ul class="footer__links">
             <li><a href="index.html" class="footer__link">ホーム</a></li>
             <li><a href="service.html" class="footer__link">事業内容</a></li>
-            <li><a href="school.html" class="footer__link">登録支援機関</a></li>
             <li><a href="news.html" class="footer__link">お知らせ</a></li>
             <li><a href="about.html" class="footer__link">会社概要</a></li>
             <li><a href="greeting.html" class="footer__link">代表挨拶</a></li>

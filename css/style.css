@@ -1756,10 +1756,17 @@ p {
 
 .footer__inner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1.2fr 1fr 0.8fr;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
-  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: start;
+}
+
+.footer__company {
+  text-align: left;
 }
 
 .footer__logo {
@@ -1798,6 +1805,10 @@ p {
   font-size: 0.9rem;
   line-height: 2;
   opacity: 0.9;
+  text-align: left;
+}
+
+.footer__nav {
   text-align: left;
 }
 
