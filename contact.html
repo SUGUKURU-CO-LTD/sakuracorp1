@@ -69,39 +69,45 @@
             </p>
 
             <form class="form" action="https://formsubmit.co/info@sakura-tokai.co.jp" method="POST">
+              <!-- FormSubmit設定 -->
+              <input type="hidden" name="_subject" value="【お問い合わせ】SAKURA東海コーポレーション">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://sakura-tokai.co.jp/thanks.html">
+              
               <div class="form__group">
                 <label class="form__label">
                   お名前 <span class="required">*必須</span>
                 </label>
-                <input type="text" class="form__input" name="name" placeholder="例：山田 太郎" required>
+                <input type="text" class="form__input" name="お名前" placeholder="例：山田 太郎" required>
               </div>
 
               <div class="form__group">
                 <label class="form__label">
                   会社名・団体名
                 </label>
-                <input type="text" class="form__input" name="company" placeholder="例：○○株式会社">
+                <input type="text" class="form__input" name="会社名・団体名" placeholder="例：○○株式会社">
               </div>
 
               <div class="form__group">
                 <label class="form__label">
                   メールアドレス <span class="required">*必須</span>
                 </label>
-                <input type="email" class="form__input" name="email" placeholder="例：example@email.com" required>
+                <input type="email" class="form__input" name="メールアドレス" placeholder="例：example@email.com" required>
               </div>
 
               <div class="form__group">
                 <label class="form__label">
                   電話番号
                 </label>
-                <input type="tel" class="form__input" name="tel" placeholder="例：052-000-0000">
+                <input type="tel" class="form__input" name="電話番号" placeholder="例：052-000-0000">
               </div>
 
               <div class="form__group">
                 <label class="form__label">
                   お問い合わせ種別 <span class="required">*必須</span>
                 </label>
-                <select class="form__select" name="type" required>
+                <select class="form__select" name="お問い合わせ種別" required>
                   <option value="">選択してください</option>
                   <option value="外国人材管理">外国人材管理事業について</option>
                   <option value="登録支援機関">登録支援機関事業について</option>
@@ -115,12 +121,12 @@
                 <label class="form__label">
                   お問い合わせ内容 <span class="required">*必須</span>
                 </label>
-                <textarea class="form__textarea" name="message" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+                <textarea class="form__textarea" name="お問い合わせ内容" placeholder="お問い合わせ内容をご記入ください" required></textarea>
               </div>
 
               <div class="form__group">
                 <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
-                  <input type="checkbox" name="privacy" required style="margin-top: 0.25rem;">
+                  <input type="checkbox" name="_ignore" value="privacy_agreed" required style="margin-top: 0.25rem;">
                   <span style="font-size: 0.9rem; color: var(--color-text-light);">
                     <a href="#" style="color: var(--color-accent);">プライバシーポリシー</a>に同意します
                   </span>
@@ -185,7 +191,7 @@
                   <p style="font-size: 0.95rem; color: var(--color-text); line-height: 1.8;">
                     〒480-1218<br>
                     愛知県瀬戸市中品野町5番地<br>
-                    TEL: 0566-96-6220
+                    TEL: 0561-56-1661
                   </p>
                 </div>
               </div>
@@ -233,7 +239,7 @@
               <button onclick="switchTab('company')" id="tab-company"
                 style="flex: 1; padding: 1rem; border: none; background: var(--color-primary-light); color: var(--color-text); cursor: pointer; font-weight: 600; font-size: 0.95rem;">株式会社SAKURA東海コーポレーション</button>
               <button onclick="switchTab('school')" id="tab-school"
-                style="flex: 1; padding: 1rem; border: none; background: var(--color-white); color: var(--color-text-light); cursor: pointer; font-weight: 500; font-size: 0.95rem;">SAKURA東海国際<br>学園</button>
+                style="flex: 1; padding: 1rem; border: none; background: var(--color-white); color: var(--color-text-light); cursor: pointer; font-weight: 500; font-size: 0.95rem;">SAKURA東海国際学園</button>
             </div>
             <!-- 会社住所タブ -->
             <div id="content-company" style="padding: 1.5rem;">
@@ -256,7 +262,7 @@
               <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-text);">SAKURA東海国際学園</h3>
               <p style="color: var(--color-text-light); line-height: 1.8; font-size: 0.95rem;">
                 〒480-1218 愛知県瀬戸市中品野町5番地<br>
-                TEL: 0566-96-6220
+                TEL: 0561-56-1661
               </p>
             </div>
           </div>

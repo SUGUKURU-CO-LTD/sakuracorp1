@@ -2101,11 +2101,11 @@ p {
   margin: 2rem 0 2rem auto;
   max-width: 450px;
   font-family: var(--font-heading);
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(135deg, #fff 0%, #fff 100%);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e8e8e8;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
 }
 
 .greeting-signature p {
@@ -2140,7 +2140,7 @@ p {
   .greeting-signature {
     max-width: 100%;
     margin: 2rem auto 0;
-    padding: 1rem;
+    padding: 0;
     text-align: center;
   }
   
