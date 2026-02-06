@@ -1,0 +1,15 @@
+# robots.txt for 株式会社SAKURA東海コーポレーション
+
+User-agent: *
+Allow: /
+
+# 除外するファイル・ディレクトリ
+Disallow: /thanks.html
+Disallow: /.vscode/
+Disallow: /*.pdf$
+
+# サイトマップの場所
+Sitemap: https://www.sakura-tokai.co.jp/sitemap.xml
+
+# クロール速度の調整（オプション）
+# Crawl-delay: 1
