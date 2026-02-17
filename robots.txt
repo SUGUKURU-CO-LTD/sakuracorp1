@@ -9,7 +9,7 @@ Disallow: /.vscode/
 Disallow: /*.pdf$
 
 # サイトマップの場所
-Sitemap: https://www.sakura-tokai.co.jp/sitemap.xml
+Sitemap: https://www.sakuratokaicorp.jp/sitemap.xml
 
 # クロール速度の調整（オプション）
 # Crawl-delay: 1
