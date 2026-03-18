@@ -1,5 +1,18 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "sakuracorp1.vercel.app"
+        }
+      ],
+      "destination": "https://www.sakuratokaicorp.jp/$1",
+      "permanent": true
+    }
   ]
 }
