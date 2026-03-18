@@ -19,10 +19,10 @@ function httpsGet(url) {
 }
 
 async function refreshToken(token) {
-  const url = `${API_BASE}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.FB_APP_ID || ''}&client_secret=${process.env.FB_APP_SECRET || ''}&fb_exchange_token=${token}`;
   if (!process.env.FB_APP_ID || !process.env.FB_APP_SECRET) {
     return token;
   }
+  const url = `${API_BASE}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.FB_APP_ID}&client_secret=${process.env.FB_APP_SECRET}&fb_exchange_token=${token}`;
   try {
     const data = await httpsGet(url);
     if (data.access_token) {
@@ -39,20 +39,44 @@ async function getInstagramBusinessAccountId(token) {
   const pagesData = await httpsGet(pagesUrl);
 
   if (pagesData.error) {
-    throw new Error(pagesData.error.message);
+    const code = pagesData.error.code || 'unknown';
+    const type = pagesData.error.type || 'unknown';
+    throw new Error(`Facebook API error (code ${code}, type ${type}): ${pagesData.error.message}`);
   }
 
   if (!pagesData.data || pagesData.data.length === 0) {
-    throw new Error('No Facebook Pages found for this token');
+    const tokenCheck = await httpsGet(`${API_BASE}/me?fields=id,name&access_token=${token}`);
+    if (tokenCheck.error) {
+      throw new Error(
+        'トークンが無効です。Graph API Explorer で pages_show_list, pages_read_engagement, instagram_basic の権限を付与した新しいユーザートークンを発行してください。' +
+        ` (FB error: ${tokenCheck.error.message})`
+      );
+    }
+    throw new Error(
+      `トークンは有効ですが、管理しているFacebookページが見つかりません (user: ${tokenCheck.name || tokenCheck.id})。` +
+      'FacebookページにInstagramビジネスアカウントを紐づけ、pages_show_list 権限を付与してください。'
+    );
   }
 
+  const pagesWithIg = [];
+  const pagesWithoutIg = [];
   for (const page of pagesData.data) {
     if (page.instagram_business_account && page.instagram_business_account.id) {
-      return page.instagram_business_account.id;
+      pagesWithIg.push(page);
+    } else {
+      pagesWithoutIg.push(page.name || page.id);
     }
   }
 
-  throw new Error('No Instagram Business Account linked to any Facebook Page');
+  if (pagesWithIg.length > 0) {
+    return pagesWithIg[0].instagram_business_account.id;
+  }
+
+  throw new Error(
+    `Facebookページは ${pagesData.data.length} 件見つかりましたが、Instagramビジネスアカウントが紐づいていません。` +
+    `ページ: ${pagesWithoutIg.join(', ')}。` +
+    'Facebookページ設定 → Instagram → アカウントをリンク を確認してください。'
+  );
 }
 
 module.exports = async (req, res) => {
@@ -63,7 +87,9 @@ module.exports = async (req, res) => {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 
   if (!token) {
-    return res.status(500).json({ error: 'Instagram token not configured' });
+    return res.status(500).json({
+      error: 'INSTAGRAM_ACCESS_TOKEN が設定されていません。Vercel の環境変数を確認してください。'
+    });
   }
 
   try {
@@ -76,7 +102,9 @@ module.exports = async (req, res) => {
 
     if (mediaData.error) {
       console.error('Instagram media API error:', mediaData.error);
-      return res.status(400).json({ error: mediaData.error.message });
+      return res.status(400).json({
+        error: `メディア取得エラー: ${mediaData.error.message}`
+      });
     }
 
     const posts = (mediaData.data || []).map(post => ({
