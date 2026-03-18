@@ -421,146 +421,117 @@ function initParallaxEffect() {
 })();
 
 /**
- * SAKURA東海国際学園のWordPressから最新記事を自動取得
+ * Instagram投稿をサーバーサイドAPIから取得して表示
  */
-async function updateNewsFromWordPress() {
+async function loadInstagramFeed() {
+  const container = document.getElementById('instagram-feed');
+  if (!container) return;
+
   try {
-    // RSS to JSON API を使用（CORS回避）
-    const rssUrl = 'https://sakura-tokai.jp/feed/';
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-    
-    console.log('学園のRSSを取得中...');
-    
-    // RSSを取得
-    const response = await fetch(apiUrl);
+    const response = await fetch('/api/instagram?limit=12');
     const data = await response.json();
-    
-    if (data.status !== 'ok') {
-      console.error('RSS取得エラー:', data.message);
+
+    if (!response.ok || data.error) {
+      container.innerHTML = '<p class="instagram-feed__error">Instagramの投稿を読み込めませんでした。しばらくしてから再度お試しください。</p>';
+      console.error('Instagram API error:', data.error);
       return;
     }
-    
-    console.log('記事を取得しました:', data.items.length + '件');
-    
-    // 最新3件を取得
-    const latestArticles = data.items.slice(0, 3);
-    
-    // news.htmlの表示エリアを取得
-    const newsContainer = document.querySelector('.news-list');
-    
-    if (!newsContainer) {
-      console.log('news-listが見つかりません（このページはnews.htmlではない）');
+
+    if (!data.posts || data.posts.length === 0) {
+      container.innerHTML = '<p class="instagram-feed__error">表示できる投稿がありません。</p>';
       return;
     }
-    
-    // HTMLをクリア
-    newsContainer.innerHTML = '';
-    
-    // 記事を表示
-    latestArticles.forEach(article => {
-      // 日付をフォーマット（YYYY.MM.DD形式）
-      const date = new Date(article.pubDate);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const formattedDate = `${year}.${month}.${day}`;
-      
-      // HTML要素を作成
-      const newsItem = document.createElement('div');
-      newsItem.className = 'news-item fade-in';
-      
-      newsItem.innerHTML = `
-        <a href="${article.link}" target="_blank" rel="noopener noreferrer">
-          <span class="news-date">${formattedDate}</span>
-          <h3 class="news-title">${article.title}</h3>
-        </a>
-      `;
-      
-      newsContainer.appendChild(newsItem);
+
+    container.innerHTML = '';
+
+    data.posts.forEach(post => {
+      if (!post.mediaUrl) return;
+
+      const link = document.createElement('a');
+      link.href = post.permalink;
+      link.className = 'instagram-post';
+      link.target = '_blank';
+      link.rel = 'noopener';
+
+      const img = document.createElement('img');
+      img.src = post.mediaUrl;
+      img.alt = post.caption ? post.caption.slice(0, 80) : 'Instagram投稿';
+      img.className = 'instagram-post__image';
+      img.loading = 'lazy';
+      link.appendChild(img);
+
+      if (post.mediaType === 'VIDEO') {
+        const videoIcon = document.createElement('div');
+        videoIcon.className = 'instagram-post__video-icon';
+        videoIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        link.appendChild(videoIcon);
+      }
+
+      const overlay = document.createElement('div');
+      overlay.className = 'instagram-post__overlay';
+      const caption = document.createElement('p');
+      caption.className = 'instagram-post__caption';
+      caption.textContent = post.caption || '';
+      overlay.appendChild(caption);
+      link.appendChild(overlay);
+
+      container.appendChild(link);
     });
-    
-    console.log('✅ ニュース更新完了:', latestArticles.length + '件表示');
-    
   } catch (error) {
-    console.error('❌ ニュース取得エラー:', error);
+    console.error('Instagram fetch error:', error);
+    container.innerHTML = '<p class="instagram-feed__error">Instagramの投稿を読み込めませんでした。</p>';
   }
 }
 
 /**
- * ホームページ用：最新記事を取得して表示
+ * ホームページ用：Instagram最新投稿を取得して表示
  */
-async function updateHomeNews() {
+async function loadHomeInstagram() {
+  const container = document.querySelector('.home-news-list');
+  if (!container) return;
+
   try {
-    const rssUrl = 'https://sakura-tokai.jp/feed/';
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-    
-    console.log('ホーム用：学園のRSSを取得中...');
-    
-    const response = await fetch(apiUrl);
+    const response = await fetch('/api/instagram?limit=3');
     const data = await response.json();
-    
-    if (data.status !== 'ok') {
-      console.error('RSS取得エラー:', data.message);
+
+    if (!response.ok || data.error || !data.posts || data.posts.length === 0) {
+      container.innerHTML = '<p style="text-align: center; color: var(--color-text-light);">最新情報はInstagramをご覧ください。</p>';
       return;
     }
-    
-    // 最新3件を取得
-    const latestArticles = data.items.slice(0, 3);
-    
-    // ホームページの表示エリアを取得
-    const homeNewsContainer = document.querySelector('.home-news-list');
-    
-    if (!homeNewsContainer) {
-      console.log('home-news-listが見つかりません');
-      return;
-    }
-    
-    // HTMLをクリア
-    homeNewsContainer.innerHTML = '';
-    
-    // 記事を表示（ホームページ用のスタイル）
-    latestArticles.forEach(article => {
-      const date = new Date(article.pubDate);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      const formattedDate = `${year}.${month}.${day}`;
-      
+
+    container.innerHTML = '';
+
+    data.posts.forEach(post => {
+      const date = new Date(post.timestamp);
+      const formattedDate = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+      const title = post.caption ? post.caption.split('\n')[0].slice(0, 60) : 'Instagram投稿';
+
       const newsCard = document.createElement('a');
-      newsCard.href = article.link;
+      newsCard.href = post.permalink;
       newsCard.className = 'news-card';
       newsCard.target = '_blank';
       newsCard.rel = 'noopener';
       newsCard.style.cssText = 'display: block; text-decoration: none;';
-      
       newsCard.innerHTML = `
         <div class="news-card__meta">
           <span class="news-card__date">${formattedDate}</span>
         </div>
-        <div class="news-card__title">${article.title}</div>
+        <div class="news-card__title">${title}</div>
       `;
-      
-      homeNewsContainer.appendChild(newsCard);
+      container.appendChild(newsCard);
     });
-    
-    console.log('✅ ホームニュース更新完了:', latestArticles.length + '件表示');
-    
   } catch (error) {
-    console.error('❌ ホームニュース取得エラー:', error);
+    console.error('Home Instagram error:', error);
+    container.innerHTML = '<p style="text-align: center; color: var(--color-text-light);">最新情報はInstagramをご覧ください。</p>';
   }
 }
 
-// ページ読み込み時にニュース取得を実行
 document.addEventListener('DOMContentLoaded', function() {
-  // news.html用
-  if (document.querySelector('.news-list')) {
-    console.log('news.htmlを検出。学園の最新記事を取得します...');
-    updateNewsFromWordPress();
+  if (document.getElementById('instagram-feed')) {
+    loadInstagramFeed();
   }
-  
-  // index.html（ホーム）用
+
   if (document.querySelector('.home-news-list')) {
-    console.log('index.htmlを検出。学園の最新記事を取得します...');
-    updateHomeNews();
+    loadHomeInstagram();
   }
 });
