@@ -421,7 +421,7 @@ function initParallaxEffect() {
 })();
 
 /**
- * Instagram投稿をサーバーサイドAPIから取得して表示
+ * Instagram投稿をサーバーサイドAPIから取得して2カラムカードで表示
  */
 async function loadInstagramFeed() {
   const container = document.getElementById('instagram-feed');
@@ -429,11 +429,19 @@ async function loadInstagramFeed() {
 
   try {
     const response = await fetch('/api/instagram?limit=12');
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error('Instagram API response:', response.status, text);
+      container.innerHTML = '<p class="instagram-feed__error">Instagramの投稿を読み込めませんでした。しばらくしてから再度お試しください。</p>';
+      return;
+    }
+
     const data = await response.json();
 
-    if (!response.ok || data.error) {
-      container.innerHTML = '<p class="instagram-feed__error">Instagramの投稿を読み込めませんでした。しばらくしてから再度お試しください。</p>';
+    if (data.error) {
       console.error('Instagram API error:', data.error);
+      container.innerHTML = '<p class="instagram-feed__error">Instagramの投稿を読み込めませんでした。しばらくしてから再度お試しください。</p>';
       return;
     }
 
@@ -447,35 +455,36 @@ async function loadInstagramFeed() {
     data.posts.forEach(post => {
       if (!post.mediaUrl) return;
 
-      const link = document.createElement('a');
-      link.href = post.permalink;
-      link.className = 'instagram-post';
-      link.target = '_blank';
-      link.rel = 'noopener';
+      const date = new Date(post.timestamp);
+      const formattedDate = date.getFullYear() + '.' +
+        String(date.getMonth() + 1).padStart(2, '0') + '.' +
+        String(date.getDate()).padStart(2, '0');
 
-      const img = document.createElement('img');
-      img.src = post.mediaUrl;
-      img.alt = post.caption ? post.caption.slice(0, 80) : 'Instagram投稿';
-      img.className = 'instagram-post__image';
-      img.loading = 'lazy';
-      link.appendChild(img);
+      const card = document.createElement('a');
+      card.href = post.permalink;
+      card.className = 'ig-card';
+      card.target = '_blank';
+      card.rel = 'noopener';
 
+      let videoBadge = '';
       if (post.mediaType === 'VIDEO') {
-        const videoIcon = document.createElement('div');
-        videoIcon.className = 'instagram-post__video-icon';
-        videoIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
-        link.appendChild(videoIcon);
+        videoBadge = '<div class="ig-card__video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 動画</div>';
       }
 
-      const overlay = document.createElement('div');
-      overlay.className = 'instagram-post__overlay';
-      const caption = document.createElement('p');
-      caption.className = 'instagram-post__caption';
-      caption.textContent = post.caption || '';
-      overlay.appendChild(caption);
-      link.appendChild(overlay);
+      const captionText = post.caption || '';
 
-      container.appendChild(link);
+      card.innerHTML =
+        '<div class="ig-card__image-wrap">' +
+          '<img src="' + post.mediaUrl + '" alt="' + (captionText.slice(0, 60) || 'Instagram投稿') + '" class="ig-card__image" loading="lazy">' +
+          videoBadge +
+        '</div>' +
+        '<div class="ig-card__body">' +
+          '<div class="ig-card__date">' + formattedDate + '</div>' +
+          '<p class="ig-card__caption">' + captionText + '</p>' +
+          '<span class="ig-card__link">Instagramで見る</span>' +
+        '</div>';
+
+      container.appendChild(card);
     });
   } catch (error) {
     console.error('Instagram fetch error:', error);

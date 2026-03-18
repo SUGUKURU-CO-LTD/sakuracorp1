@@ -35,92 +35,7 @@
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=20">
   <style>
-    /* News Page Specific Styles */
-
-    /* News Tab System */
-    .news-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .news-tab {
-      padding: 1rem 2rem;
-      background: var(--color-white);
-      border: 2px solid var(--color-primary);
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--color-primary-dark);
-      cursor: pointer;
-      transition: all var(--transition-normal);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .news-tab::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left var(--transition-slow);
-    }
-
-    .news-tab:hover::before {
-      left: 100%;
-    }
-
-    .news-tab:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .news-tab.active {
-      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-accent));
-      border-color: var(--color-primary-dark);
-      color: var(--color-white);
-    }
-
-    .news-tab .count {
-      display: inline-block;
-      background: rgba(0, 0, 0, 0.1);
-      padding: 0.2rem 0.5rem;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      margin-left: 0.5rem;
-    }
-
-    .news-tab.active .count {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* News Section */
-    .news-section {
-      display: none;
-    }
-
-    .news-section.active {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* Instagram Feed - Card Layout */
     .news-section__header {
       display: flex;
       align-items: center;
@@ -155,99 +70,155 @@
       font-weight: 600;
     }
 
-    /* Enhanced News Card */
-    .news-card-enhanced {
+    .instagram-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .instagram-feed__loading,
+    .instagram-feed__error {
+      text-align: center;
+      color: var(--color-text-light);
+      padding: 3rem 0;
+    }
+
+    .instagram-feed__error {
+      background: #fff8e1;
+      border-radius: 12px;
+      border: 1px solid #ffe082;
+      padding: 2rem;
+    }
+
+    .ig-card {
+      display: flex;
       background: var(--color-white);
       border-radius: 16px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 1rem;
-      border-left: 4px solid var(--color-primary);
-      transition: all 0.3s ease;
+      overflow: hidden;
       box-shadow: var(--shadow-sm);
-      display: block;
+      transition: all 0.3s ease;
       text-decoration: none;
+      color: inherit;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .ig-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .ig-card__image-wrap {
+      flex: 0 0 280px;
       position: relative;
       overflow: hidden;
     }
 
-    .news-card-enhanced::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
+    .ig-card__image {
+      width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, var(--color-primary), var(--color-primary-dark));
-      transition: width var(--transition-normal);
+      min-height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
     }
 
-    .news-card-enhanced:hover {
-      transform: translateX(8px);
-      box-shadow: var(--shadow-md);
+    .ig-card:hover .ig-card__image {
+      transform: scale(1.03);
     }
 
-    .news-card-enhanced:hover::before {
-      width: 6px;
-    }
-
-    .news-card-enhanced__meta {
+    .ig-card__video-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-      flex-wrap: wrap;
+      gap: 0.3rem;
     }
 
-    .news-card-enhanced__date {
-      font-size: 0.95rem;
+    .ig-card__video-badge svg {
+      width: 12px;
+      height: 12px;
+      fill: #fff;
+    }
+
+    .ig-card__body {
+      flex: 1;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .ig-card__date {
+      font-size: 0.85rem;
       color: var(--color-primary-dark);
       font-weight: 600;
+      margin-bottom: 0.75rem;
       font-family: var(--font-heading);
     }
 
-    .news-card-enhanced__category {
-      font-size: 0.75rem;
-      background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
-      color: var(--color-accent);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-
-    .news-card-enhanced__category--archive {
-      background: var(--color-text-light);
-      color: var(--color-white);
-    }
-
-    .news-card-enhanced__title {
+    .ig-card__caption {
+      font-size: 0.95rem;
+      line-height: 1.8;
       color: var(--color-text);
-      font-weight: 600;
-      font-size: 1.15rem;
-      line-height: 1.6;
-      margin-bottom: 0.5rem;
-      transition: color var(--transition-fast);
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      white-space: pre-line;
     }
 
-    .news-card-enhanced:hover .news-card-enhanced__title {
+    .ig-card__link {
+      margin-top: 1rem;
+      font-size: 0.85rem;
       color: var(--color-primary-dark);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
-    .news-card-enhanced__excerpt {
-      color: var(--color-text-light);
-      font-size: 0.9rem;
-      line-height: 1.7;
+    .ig-card__link::after {
+      content: '\2192';
     }
 
-    /* Archive Section */
-    .archive-section {
-      background: linear-gradient(135deg, var(--color-bg-light) 0%, #fff 50%, var(--color-bg-light) 100%);
-      padding: 3rem 0;
-      margin-top: 3rem;
-      border-radius: 24px;
+    .instagram-follow {
+      text-align: center;
+      margin-bottom: 3rem;
     }
 
-    .archive-section .section__header {
-      margin-bottom: 2rem;
+    .instagram-follow__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 2rem;
+      background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045);
+      color: #fff;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
+    }
+
+    .instagram-follow__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(131, 58, 180, 0.4);
+    }
+
+    .instagram-follow__btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
     /* Social Links Section */
@@ -327,11 +298,6 @@
       color: #fff;
     }
 
-    .social-card__icon--youtube {
-      background: linear-gradient(135deg, #FF0000, #CC0000);
-      color: #fff;
-    }
-
     .social-card__title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -345,324 +311,27 @@
       line-height: 1.6;
     }
 
-    /* Academy Banner */
-    .academy-banner {
-      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-accent) 100%);
-      color: #fff;
-      padding: 2rem 2.5rem;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .academy-banner::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .academy-banner::after {
-      content: '🌸';
-      position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 4rem;
-      opacity: 0.3;
-    }
-
     @media (max-width: 768px) {
-      .academy-banner {
+      .ig-card {
         flex-direction: column;
-        text-align: center;
       }
 
-      .academy-banner::after {
-        display: none;
+      .ig-card__image-wrap {
+        flex: none;
+        width: 100%;
       }
-    }
 
-    .academy-banner__content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .academy-banner__content h3 {
-      color: #fff;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .academy-banner__content p {
-      opacity: 0.95;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .academy-banner .btn {
-      position: relative;
-      z-index: 1;
-      background: #fff;
-      color: var(--color-primary-dark);
-      white-space: nowrap;
-      font-weight: 600;
-    }
-
-    .academy-banner .btn:hover {
-      background: var(--color-primary-light);
-      transform: translateY(-3px);
-    }
-
-    /* Pagination */
-    .news-pagination {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
-
-    .news-pagination__btn {
-      width: 40px;
-      height: 40px;
-      border: 2px solid var(--color-primary);
-      background: var(--color-white);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      color: var(--color-text);
-    }
-
-    .news-pagination__btn:hover,
-    .news-pagination__btn.active {
-      background: var(--color-primary-dark);
-      border-color: var(--color-primary-dark);
-      color: #fff;
-    }
-
-    /* Latest News List (Auto-fetched from WordPress) */
-    .news-list {
-      background: linear-gradient(135deg, #fff8e1 0%, #fff 100%);
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 2px solid var(--color-primary-light);
-    }
-
-    .news-list .news-item {
-      padding: 1rem;
-      border-bottom: 1px solid var(--color-primary-light);
-      transition: all 0.3s ease;
-    }
-
-    .news-list .news-item:last-child {
-      border-bottom: none;
-    }
-
-    .news-list .news-item:hover {
-      background: rgba(255, 182, 193, 0.1);
-      border-radius: 8px;
-    }
-
-    .news-list .news-item a {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .news-list .news-date {
-      display: inline-block;
-      font-size: 0.9rem;
-      color: var(--color-primary-dark);
-      font-weight: 600;
-      margin-right: 1rem;
-    }
-
-    .news-list .news-title {
-      display: inline;
-      font-size: 1rem;
-      color: var(--color-text);
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .news-list .news-item:hover .news-title {
-      color: var(--color-primary-dark);
-    }
-
-    /* Month Group */
-    .news-month-group {
-      margin-bottom: 2rem;
-    }
-
-    .news-month-group__header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--color-primary-light);
-    }
-
-    .news-month-group__title {
-      font-size: 1.2rem;
-      color: var(--color-primary-dark);
-      font-weight: 600;
-    }
-
-    .news-month-group__line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--color-primary-light), transparent);
-    }
-
-    /* Instagram Feed */
-    .instagram-feed {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .instagram-feed__loading {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: var(--color-text-light);
-      padding: 3rem 0;
-    }
-
-    .instagram-feed__error {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: var(--color-text-light);
-      padding: 2rem;
-      background: #fff8e1;
-      border-radius: 12px;
-      border: 1px solid #ffe082;
-    }
-
-    .instagram-post {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--color-white);
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: block;
-      aspect-ratio: 1;
-    }
-
-    .instagram-post:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .instagram-post__image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .instagram-post__overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .instagram-post:hover .instagram-post__overlay {
-      opacity: 1;
-    }
-
-    .instagram-post__caption {
-      color: #fff;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      text-align: center;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .instagram-post__video-icon {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      width: 28px;
-      height: 28px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .instagram-post__video-icon svg {
-      width: 14px;
-      height: 14px;
-      fill: #fff;
-    }
-
-    .instagram-follow {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .instagram-follow__btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 2rem;
-      background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045);
-      color: #fff;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
-    }
-
-    .instagram-follow__btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(131, 58, 180, 0.4);
-    }
-
-    .instagram-follow__btn svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-
-    @media (max-width: 768px) {
-      .instagram-feed {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
+      .ig-card__image {
+        min-height: 220px;
+        max-height: 320px;
       }
-    }
 
-    @media (max-width: 480px) {
-      .instagram-feed {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+      .ig-card__body {
+        padding: 1.25rem;
+      }
+
+      .ig-card__caption {
+        -webkit-line-clamp: 4;
       }
     }
   </style>
@@ -713,12 +382,11 @@
       </div>
     </section>
 
-    <!-- News Section -->
+    <!-- Instagram Feed Section -->
     <section class="section">
       <div class="container">
         <div style="max-width: 900px; margin: 0 auto;">
 
-          <!-- Instagram Feed Section -->
           <div class="news-section__header" style="margin-top: 0;">
             <h2 class="news-section__title">Instagram</h2>
             <span class="year-badge">LATEST POSTS</span>
@@ -731,276 +399,6 @@
               <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               Instagramをフォロー
             </a>
-          </div>
-
-          <!-- News Tabs -->
-          <div class="news-tabs fade-in">
-            <button class="news-tab active" data-tab="2025">
-              2025年 <span class="count">12</span>
-            </button>
-            <button class="news-tab" data-tab="archive">
-              アーカイブ <span class="count">∞</span>
-            </button>
-          </div>
-
-          <!-- 2025 News Section -->
-          <div id="news-2025" class="news-section active fade-in">
-            <div class="news-section__header">
-              <h2 class="news-section__title">2025年</h2>
-              <span class="year-badge">LATEST NEWS</span>
-            </div>
-
-            <!-- December 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年12月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/12/17/%e5%b9%b4%e6%9c%ab%e5%b9%b4%e5%a7%8b%e4%bc%91%e5%9c%92%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.12.17</span>
-                  <span class="news-card-enhanced__category">重要なお知らせ</span>
-                </div>
-                <div class="news-card-enhanced__title">年末年始休園のお知らせ</div>
-                <p class="news-card-enhanced__excerpt">年末年始の休園期間についてご案内いたします。</p>
-              </a>
-
-              <a href="https://sakura-tokai.jp/2025/12/03/sakura%e5%bf%98%e5%b9%b4%e4%bc%9a%ef%bc%81/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.12.03</span>
-                  <span class="news-card-enhanced__category">学園行事</span>
-                </div>
-                <div class="news-card-enhanced__title">SAKURA忘年会！</div>
-                <p class="news-card-enhanced__excerpt">SAKURA東海国際学園の忘年会の様子をお届けします。</p>
-              </a>
-            </div>
-
-            <!-- October 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年10月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/10/21/2025%e5%b9%b410%e6%9c%88%e3%80%80day-of-fun%ef%bc%81/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.10.21</span>
-                  <span class="news-card-enhanced__category">Day of Fun</span>
-                </div>
-                <div class="news-card-enhanced__title">2025年10月 Day of fun！</div>
-                <p class="news-card-enhanced__excerpt">学園の楽しいイベントの様子をご紹介します。</p>
-              </a>
-
-              <a href="https://sakura-tokai.jp/2025/10/03/sakura%e3%81%ae%e8%87%aa%e5%b7%b1%e7%b4%b9%e4%bb%8b%e3%82%b7%e3%83%bc%e3%83%88/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.10.03</span>
-                  <span class="news-card-enhanced__category">生徒紹介</span>
-                </div>
-                <div class="news-card-enhanced__title">SAKURAの自己紹介シート</div>
-                <p class="news-card-enhanced__excerpt">SAKURAの生徒たちの自己紹介シートをご紹介。</p>
-              </a>
-            </div>
-
-            <!-- September 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年9月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/09/09/%e6%b6%88%e7%81%ab%e8%a8%93%e7%b7%b4/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.09.09</span>
-                  <span class="news-card-enhanced__category">安全訓練</span>
-                </div>
-                <div class="news-card-enhanced__title">消火訓練</div>
-                <p class="news-card-enhanced__excerpt">学園での消火訓練の様子をお伝えします。</p>
-              </a>
-            </div>
-
-            <!-- July 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年7月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/07/31/%e5%a4%8f%e5%ad%a3%e4%bc%91%e6%9a%87%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b-3/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.07.31</span>
-                  <span class="news-card-enhanced__category">重要なお知らせ</span>
-                </div>
-                <div class="news-card-enhanced__title">夏季休暇のお知らせ</div>
-                <p class="news-card-enhanced__excerpt">夏季休暇期間のご案内です。</p>
-              </a>
-
-              <a href="https://sakura-tokai.jp/2025/07/31/%e5%85%a5%e5%9b%bd%e3%80%81%e5%85%a5%e5%9c%92%e3%83%a9%e3%83%83%e3%82%b7%e3%83%a5%ef%bc%81%ef%bc%81/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.07.31</span>
-                  <span class="news-card-enhanced__category">新入生</span>
-                </div>
-                <div class="news-card-enhanced__title">入国、入園ラッシュ！！</div>
-                <p class="news-card-enhanced__excerpt">たくさんの新入生が入園しました！</p>
-              </a>
-            </div>
-
-            <!-- June 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年6月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/06/16/%e8%a6%81%e6%b3%a8%e6%84%8f%ef%bc%81%ef%bc%81%ef%bc%81/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.06.16</span>
-                  <span class="news-card-enhanced__category">重要なお知らせ</span>
-                </div>
-                <div class="news-card-enhanced__title">要注意！！！</div>
-                <p class="news-card-enhanced__excerpt">皆さんへの重要なお知らせです。</p>
-              </a>
-            </div>
-
-            <!-- May 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年5月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="#" class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.05.16</span>
-                  <span class="news-card-enhanced__category">学園行事</span>
-                </div>
-                <div class="news-card-enhanced__title">感謝！！</div>
-                <p class="news-card-enhanced__excerpt">日頃への感謝の気持ちを込めて。</p>
-              </a>
-            </div>
-
-            <!-- April 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年4月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/04/25/%e3%82%b4%e3%83%bc%e3%83%ab%e3%83%87%e3%83%b3%e3%82%a6%e3%82%a3%e3%83%bc%e3%82%af%e4%bc%91%e6%9a%87%e3%81%ae%e3%81%8a%e7%9f%a5%e3%82%89%e3%81%9b/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.04.25</span>
-                  <span class="news-card-enhanced__category">重要なお知らせ</span>
-                </div>
-                <div class="news-card-enhanced__title">ゴールデンウィーク休園のお知らせ</div>
-                <p class="news-card-enhanced__excerpt">ゴールデンウィークの休園期間のご案内です。</p>
-              </a>
-            </div>
-
-            <!-- March 2025 -->
-            <div class="news-month-group">
-              <div class="news-month-group__header">
-                <h3 class="news-month-group__title">2025年3月</h3>
-                <div class="news-month-group__line"></div>
-              </div>
-
-              <a href="https://sakura-tokai.jp/2025/03/18/sakura%e6%9d%b1%e6%b5%b7%e5%9b%bd%e9%9a%9b%e5%ad%a6%e5%9c%92%e3%80%80%e6%81%92%e4%be%a1%e3%80%80day-of-fun%ef%bc%812025%e5%b9%b43%e6%9c%88%e7%b7%a8/"
-                class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.03.18</span>
-                  <span class="news-card-enhanced__category">Day of Fun</span>
-                </div>
-                <div class="news-card-enhanced__title">SAKURA東海国際学園 恒例 Day of Fun！2025年3月編</div>
-                <p class="news-card-enhanced__excerpt">恒例のDay of Fun！2025年3月の様子をお届けします。</p>
-              </a>
-
-              <a href="#" class="news-card-enhanced" target="_blank" rel="noopener">
-                <div class="news-card-enhanced__meta">
-                  <span class="news-card-enhanced__date">2025.03.11</span>
-                  <span class="news-card-enhanced__category">学園行事</span>
-                </div>
-                <div class="news-card-enhanced__title">もうすぐ春ですね♪</div>
-                <p class="news-card-enhanced__excerpt">春の訪れを感じる季節になりました。</p>
-              </a>
-            </div>
-          </div>
-
-          <!-- Archive Section -->
-          <div id="news-archive" class="news-section fade-in">
-            <div class="archive-section">
-              <div class="container">
-                <div class="section__header fade-in">
-                  <h2 class="section__title">過去のおしらせ</h2>
-                  <p class="section__subtitle">ARCHIVE</p>
-                </div>
-                <p class="fade-in" style="text-align: center; color: var(--color-text-light); margin-bottom: 2rem;">
-                  過去に掲載されたお知らせのアーカイブです。<br>
-                  詳細を知りたい方は<a href="https://sakura-tokai.jp/" target="_blank"
-                    rel="noopener">SAKURA東海国際学園公式サイト</a>をご覧ください。
-                </p>
-
-                <!-- 2024年 -->
-                <div class="news-month-group" style="padding: 0 1rem;">
-                  <div class="news-month-group__header">
-                    <h3 class="news-month-group__title">2024年</h3>
-                    <div class="news-month-group__line"></div>
-                  </div>
-
-                  <a href="https://sakura-tokai.jp/2024/" class="news-card-enhanced" style="opacity: 0.7;" target="_blank" rel="noopener">
-                    <div class="news-card-enhanced__meta">
-                      <span class="news-card-enhanced__date">2024.12.xx</span>
-                      <span class="news-card-enhanced__category news-card-enhanced__category--archive">アーカイブ</span>
-                    </div>
-                    <div class="news-card-enhanced__title">年末年始休園のお知らせ（2024年度）</div>
-                    <p class="news-card-enhanced__excerpt">過去の年末年始休園情報です。</p>
-                  </a>
-
-                  <a href="https://sakura-tokai.jp/2024/" class="news-card-enhanced" style="opacity: 0.7;" target="_blank" rel="noopener">
-                    <div class="news-card-enhanced__meta">
-                      <span class="news-card-enhanced__date">2024.07.xx</span>
-                      <span class="news-card-enhanced__category news-card-enhanced__category--archive">アーカイブ</span>
-                    </div>
-                    <div class="news-card-enhanced__title">夏季休暇のお知らせ（2024年度）</div>
-                    <p class="news-card-enhanced__excerpt">過去の夏季休暇情報です。</p>
-                  </a>
-
-                  <a href="https://sakura-tokai.jp/2024/" class="news-card-enhanced" style="opacity: 0.7;" target="_blank" rel="noopener">
-                    <div class="news-card-enhanced__meta">
-                      <span class="news-card-enhanced__date">2024.04.xx</span>
-                      <span class="news-card-enhanced__category news-card-enhanced__category--archive">アーカイブ</span>
-                    </div>
-                    <div class="news-card-enhanced__title">ゴールデンウィーク休園のお知らせ（2024年度）</div>
-                    <p class="news-card-enhanced__excerpt">過去のゴールデンウィーク休園情報です。</p>
-                  </a>
-                </div>
-
-                <!-- 2023年以前 -->
-                <div class="news-month-group" style="padding: 0 1rem;">
-                  <div class="news-month-group__header">
-                    <h3 class="news-month-group__title">2023年以前</h3>
-                    <div class="news-month-group__line"></div>
-                  </div>
-
-                  <p style="color: var(--color-text-light); text-align: center; padding: 2rem;">
-                    2023年以前のおしらせは、SAKURA東海国際学園公式サイトでご確認ください。
-                  </p>
-
-                  <div style="text-align: center; margin-top: 1rem;">
-                    <a href="https://sakura-tokai.jp/" class="btn btn--outline" target="_blank" rel="noopener">
-                      SAKURA東海国際学園公式サイトで過去の記事を探す →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -1104,32 +502,6 @@
   </footer>
 
   <script src="js/main.js"></script>
-
-  <script>
-    // News Tab Functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      const tabs = document.querySelectorAll('.news-tab');
-      const sections = document.querySelectorAll('.news-section');
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-          const targetTab = this.dataset.tab;
-
-          // Update active tab
-          tabs.forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-
-          // Update active section
-          sections.forEach(s => {
-            s.classList.remove('active');
-            if (s.id === 'news-' + targetTab) {
-              s.classList.add('active');
-            }
-          });
-        });
-      });
-    });
-  </script>
 </body>
 
 </html>

@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 
   if (!token) {
-    return res.status(500).json({ error: 'Instagram token not configured' });
+    return res.status(500).json({ error: 'Instagram token not configured', hint: 'Set INSTAGRAM_ACCESS_TOKEN in Vercel Environment Variables' });
   }
 
   try {
@@ -64,7 +64,7 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({ posts });
   } catch (error) {
-    console.error('Instagram fetch error:', error);
-    return res.status(500).json({ error: 'Failed to fetch Instagram posts' });
+    console.error('Instagram fetch error:', error.message);
+    return res.status(500).json({ error: 'Failed to fetch Instagram posts', detail: error.message });
   }
 };
