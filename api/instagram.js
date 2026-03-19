@@ -83,27 +83,9 @@ async function getInstagramBusinessAccountId(token) {
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=150');
+  res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=300');
 
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
-
-  // #region agent log — ?debug=1 で診断
-  if (req.query.debug === '1') {
-    const d = { ts: Date.now(), sid: 'b28977' };
-    d.tokenSet = !!token;
-    d.tokenLen = token ? token.length : 0;
-    d.tokenPre = token ? token.slice(0, 8) + '...' : null;
-    d.fbAppIdSet = !!process.env.FB_APP_ID;
-    d.fbSecretSet = !!process.env.FB_APP_SECRET;
-    d.igIdEnv = process.env.IG_BUSINESS_ACCOUNT_ID || null;
-    d.fbPageIdEnv = process.env.FB_PAGE_ID || null;
-    try {
-      d.meAccounts = await httpsGet(`${API_BASE}/me/accounts?fields=id,name,instagram_business_account&access_token=${token}`);
-      d.me = await httpsGet(`${API_BASE}/me?fields=id,name&access_token=${token}`);
-    } catch (e) { d.err = e.message; }
-    return res.status(200).json({ debug: true, d });
-  }
-  // #endregion
 
   if (!token) {
     return res.status(500).json({
