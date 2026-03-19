@@ -19,10 +19,10 @@ function httpsGet(url) {
 }
 
 async function refreshToken(token) {
-  const url = `${API_BASE}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.FB_APP_ID || ''}&client_secret=${process.env.FB_APP_SECRET || ''}&fb_exchange_token=${token}`;
   if (!process.env.FB_APP_ID || !process.env.FB_APP_SECRET) {
     return token;
   }
+  const url = `${API_BASE}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.FB_APP_ID}&client_secret=${process.env.FB_APP_SECRET}&fb_exchange_token=${token}`;
   try {
     const data = await httpsGet(url);
     if (data.access_token) {
@@ -35,15 +35,38 @@ async function refreshToken(token) {
 }
 
 async function getInstagramBusinessAccountId(token) {
+  // 環境変数で直接指定されていればスキップ
+  if (process.env.IG_BUSINESS_ACCOUNT_ID) {
+    return process.env.IG_BUSINESS_ACCOUNT_ID;
+  }
+
+  // FB_PAGE_ID が設定されていれば、そこから直接取得
+  if (process.env.FB_PAGE_ID) {
+    const pageUrl = `${API_BASE}/${process.env.FB_PAGE_ID}?fields=instagram_business_account&access_token=${token}`;
+    const pageData = await httpsGet(pageUrl);
+    if (pageData.error) {
+      throw new Error(`FB_PAGE_ID(${process.env.FB_PAGE_ID})からの取得エラー: ${pageData.error.message}`);
+    }
+    if (pageData.instagram_business_account && pageData.instagram_business_account.id) {
+      return pageData.instagram_business_account.id;
+    }
+    throw new Error(`FB_PAGE_ID(${process.env.FB_PAGE_ID})にInstagramビジネスアカウントが紐づいていません。`);
+  }
+
+  // 自動検出: /me/accounts
   const pagesUrl = `${API_BASE}/me/accounts?fields=id,name,instagram_business_account&access_token=${token}`;
   const pagesData = await httpsGet(pagesUrl);
 
   if (pagesData.error) {
-    throw new Error(pagesData.error.message);
+    throw new Error(`Facebook API error (code ${pagesData.error.code}): ${pagesData.error.message}`);
   }
 
   if (!pagesData.data || pagesData.data.length === 0) {
-    throw new Error('No Facebook Pages found for this token');
+    throw new Error(
+      'Facebookページが見つかりません。解決方法: ' +
+      '(1) Graph API Explorer で pages_show_list 権限を付与してトークンを再発行するか、' +
+      '(2) Vercel環境変数に IG_BUSINESS_ACCOUNT_ID を直接設定してください。'
+    );
   }
 
   for (const page of pagesData.data) {
@@ -52,18 +75,22 @@ async function getInstagramBusinessAccountId(token) {
     }
   }
 
-  throw new Error('No Instagram Business Account linked to any Facebook Page');
+  throw new Error(
+    `Facebookページ(${pagesData.data.map(p => p.name || p.id).join(', ')})にInstagramビジネスアカウントが紐づいていません。`
+  );
 }
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=300');
+  res.setHeader('Cache-Control', 's-maxage=180, stale-while-revalidate=60');
 
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 
   if (!token) {
-    return res.status(500).json({ error: 'Instagram token not configured' });
+    return res.status(500).json({
+      error: 'INSTAGRAM_ACCESS_TOKEN が未設定です。'
+    });
   }
 
   try {
