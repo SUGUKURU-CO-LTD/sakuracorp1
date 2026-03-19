@@ -83,7 +83,7 @@ async function getInstagramBusinessAccountId(token) {
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=300');
+  res.setHeader('Cache-Control', 's-maxage=180, stale-while-revalidate=60');
 
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 
