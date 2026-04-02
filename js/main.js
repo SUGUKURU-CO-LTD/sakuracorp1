@@ -453,8 +453,6 @@ async function loadInstagramFeed() {
     container.innerHTML = '';
 
     data.posts.forEach(post => {
-      if (!post.mediaUrl) return;
-
       const date = new Date(post.timestamp);
       const formattedDate = date.getFullYear() + '.' +
         String(date.getMonth() + 1).padStart(2, '0') + '.' +
@@ -466,16 +464,20 @@ async function loadInstagramFeed() {
       card.target = '_blank';
       card.rel = 'noopener';
 
-      let videoBadge = '';
-      if (post.mediaType === 'VIDEO') {
-        videoBadge = '<div class="ig-card__video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 動画</div>';
-      }
+      const isVideo = post.mediaType === 'VIDEO';
+      const videoBadge = isVideo
+        ? '<div class="ig-card__video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 動画</div>'
+        : '';
 
       const captionText = post.caption || '';
 
+      const imageHtml = post.mediaUrl
+        ? '<img src="' + post.mediaUrl + '" alt="' + (captionText.slice(0, 60) || 'Instagram投稿') + '" class="ig-card__image" loading="lazy">'
+        : '<div class="ig-card__image" style="background:linear-gradient(135deg,#FCE4EC,#F8BBD9);display:flex;align-items:center;justify-content:center;min-height:280px;"><svg viewBox="0 0 24 24" style="width:48px;height:48px;fill:#E91E63;opacity:0.5"><path d="M8 5v14l11-7z"/></svg></div>';
+
       card.innerHTML =
         '<div class="ig-card__image-wrap">' +
-          '<img src="' + post.mediaUrl + '" alt="' + (captionText.slice(0, 60) || 'Instagram投稿') + '" class="ig-card__image" loading="lazy">' +
+          imageHtml +
           videoBadge +
         '</div>' +
         '<div class="ig-card__body">' +

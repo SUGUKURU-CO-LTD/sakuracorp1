@@ -106,14 +106,20 @@ module.exports = async (req, res) => {
       return res.status(400).json({ error: mediaData.error.message });
     }
 
-    const posts = (mediaData.data || []).map(post => ({
-      id: post.id,
-      caption: post.caption || '',
-      mediaType: post.media_type,
-      mediaUrl: post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url,
-      permalink: post.permalink,
-      timestamp: post.timestamp
-    }));
+    const posts = (mediaData.data || []).map(post => {
+      const isVideo = post.media_type === 'VIDEO' || post.media_type === 'REELS';
+      const mediaUrl = isVideo
+        ? (post.thumbnail_url || post.media_url)
+        : post.media_url;
+      return {
+        id: post.id,
+        caption: post.caption || '',
+        mediaType: isVideo ? 'VIDEO' : post.media_type,
+        mediaUrl: mediaUrl || null,
+        permalink: post.permalink,
+        timestamp: post.timestamp
+      };
+    });
 
     return res.status(200).json({ posts });
   } catch (error) {
